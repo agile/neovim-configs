@@ -28,14 +28,14 @@ autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 " autocmd BufWritePre *.md,*.markdown,*.sql,*.sh,*.scala,*.sbt,*.go,*.py,*.js,*pp,*.c,*.cc,*.h,*.rb,*.y*ml :call <SID>StripTrailingWhitespaces()
 
 " invoke tab completion when hitting tab, unless we're in the indentation zone..
-function! CleverTab()
-   if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-      return "\<Tab>"
-   else
-      return "\<C-N>"
-   endif
-endfunction
-inoremap <Tab> <C-R>=CleverTab()<CR>
+" function! CleverTab()
+"    if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+"       return "\<Tab>"
+"    else
+"       return "\<C-N>"
+"    endif
+" endfunction
+" inoremap <Tab> <C-R>=CleverTab()<CR>
 
 " Open NERDTree if we're given a directory
 autocmd StdinReadPre * let s:std_in=1
