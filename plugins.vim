@@ -3,7 +3,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " Interact with test runners from vim
 Plug 'janko-m/vim-test'
 " annotate indentations
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 " align the things
 Plug 'godlygeek/tabular'
 " show what changed (when committing)
