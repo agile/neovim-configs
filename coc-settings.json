@@ -1,9 +1,32 @@
+// https://github.com/neoclide/coc.nvim/wiki/Language-servers
 {
   "languageserver": {
+    // https://scalameta.org/metals/docs/editors/vim.html
     "metals": {
       "command": "metals-vim",
       "rootPatterns": ["build.sbt"],
       "filetypes": ["scala", "sbt"]
+    },
+    // https://github.com/mads-hartmann/bash-language-server
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    // https://github.com/rcjsuen/dockerfile-language-server-nodejs
+    "dockerfile": {
+      "command": "docker-langserver",
+      "filetypes": ["dockerfile"],
+      "args": ["--stdio"]
+    },
+    // (vim/erb/markdown) https://github.com/mattn/efm-langserver
+    "efm": {
+      "command": "efm-langserver",
+      // "args": [],
+      // custom config path
+      "args": ["-c", "/home/mike/.config/nvim/efm-config.yml"],
+      "filetypes": ["vim", "eruby", "markdown"]
     }
   }
 }
