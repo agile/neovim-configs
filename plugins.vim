@@ -12,8 +12,13 @@ Plug 'ghewgill/vim-scmdiff'
 Plug 'rafi/awesome-vim-colorschemes'
 " git
 Plug 'tpope/vim-fugitive'
+
 " linter/lsp-client
-Plug 'w0rp/ale'
+" disabled until/unless I configure it to avoid conflicting with what coc.nvim is doing..
+" eg: coc.nvim pop-up sometimes comes up with useful info but gets closed almost
+" immediately becuase ALE linter errors as I'm typing
+" Plug 'w0rp/ale'
+"
 " render color codes
 Plug 'ap/vim-css-color'
 " Navigator
