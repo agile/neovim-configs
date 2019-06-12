@@ -1,5 +1,14 @@
 // https://github.com/neoclide/coc.nvim/wiki/Language-servers
 {
+
+  // re: https://github.com/neoclide/coc.nvim/blob/master/data/schema.json
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "coc.preferences.hoverTarget": "float",
+  "coc.preferences.enableFloatHighlight": true,
+  "coc.source.file.ignoreHidden": false,
+  "coc.preferences.formatOnSaveFiletypes": ["python"],
+  "coc.preferences.formatOnType": true,
+
   "languageserver": {
     // https://scalameta.org/metals/docs/editors/vim.html
     "metals": {
