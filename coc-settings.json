@@ -9,6 +9,19 @@
   "coc.preferences.formatOnSaveFiletypes": ["python"],
   "coc.preferences.formatOnType": true,
 
+  // https://github.com/neoclide/coc-python
+  // disable jedi so the extension downloads/installs mpls
+  "python.jediEnabled": false,
+  "python.autoUpdateLanguageServer": true,
+  "python.autoComplete.addBrackets": true,
+  "python.autoComplete.typeshedPaths": ["./typeshed_stubs"],
+  "python.formatting.provider": "yapf",
+  "python.formatting.yapfArgs": ["--style", "{column_limit: 100}"],
+  "python.formatting.autopep8Args": ["--max-line-length", "100", "--experimental"],
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.lintOnSave": true,
+
   "languageserver": {
     // https://scalameta.org/metals/docs/editors/vim.html
     "metals": {
@@ -58,74 +71,6 @@
         "eruby",
         "markdown"
       ]
-    },
-    // https://github.com/palantir/python-language-server
-    "python": {
-      "command": "python",
-      "args": [
-        "-mpyls",
-        "-vv",
-        "--log-file",
-        "/tmp/lsp_python.log"
-      ],
-      "trace.server": "verbose",
-      "filetypes": [
-        "python"
-      ],
-      "settings": {
-        "pyls": {
-          "enable": true,
-          "trace": {
-            "server": "verbose"
-          },
-          "commandPath": "",
-          "configurationSources": [
-            "pycodestyle"
-          ],
-          "plugins": {
-            "jedi_completion": {
-              "enabled": true
-            },
-            "jedi_hover": {
-              "enabled": true
-            },
-            "jedi_references": {
-              "enabled": true
-            },
-            "jedi_signature_help": {
-              "enabled": true
-            },
-            "jedi_symbols": {
-              "enabled": true,
-              "all_scopes": true
-            },
-            "mccabe": {
-              "enabled": true,
-              "threshold": 15
-            },
-            "preload": {
-              "enabled": true
-            },
-            "pycodestyle": {
-              "enabled": true
-            },
-            "pydocstyle": {
-              "enabled": false,
-              "match": "(?!test_).*\\.py",
-              "matchDir": "[^\\.].*"
-            },
-            "pyflakes": {
-              "enabled": true
-            },
-            "rope_completion": {
-              "enabled": true
-            },
-            "yapf": {
-              "enabled": true
-            }
-          }
-        }
-      }
     },
     "dls": {
       "command": "diagnostic-languageserver",

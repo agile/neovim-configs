@@ -104,6 +104,9 @@ command! -nargs=0 Format :call CocAction('format')
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
+" help coc determine the 'workspace' of python projects by looking for these
+" re: https://github.com/neoclide/coc.nvim/wiki/Using-workspaceFolders#resolve-workspace-folder
+" autocmd FileType python let b:coc_root_patterns = ['.git', '.env']
 
 " Add diagnostic info for https://github.com/itchyny/lightline.vim
 let g:lightline = {
