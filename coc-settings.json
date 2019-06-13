@@ -15,9 +15,11 @@
   "python.autoUpdateLanguageServer": true,
   "python.autoComplete.addBrackets": true,
   "python.autoComplete.typeshedPaths": ["./typeshed_stubs"],
-  "python.formatting.provider": "yapf",
+  "python.formatting.provider": "black",
   "python.formatting.yapfArgs": ["--style", "{column_limit: 100}"],
   "python.formatting.autopep8Args": ["--max-line-length", "100", "--experimental"],
+  "python.formatting.blackPath": "~/.pyenv/shims/black",
+  "python.formatting.blackArgs": ["--line-length", "100"],
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.linting.lintOnSave": true,
@@ -64,7 +66,7 @@
       // custom config path
       "args": [
         "-c",
-        "/home/mike/.config/nvim/efm-config.yml"
+        "~/.config/nvim/efm-config.yml"
       ],
       "filetypes": [
         "vim",
