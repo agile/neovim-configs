@@ -15,3 +15,7 @@ nmap <silent> t<C-f> :TestFile<CR>
 nmap <silent> t<C-s> :TestSuite<CR>
 nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
+
+" Make visual selection copy to PRIMARY_CLIPBOARD
+" re: https://github.com/neovim/neovim/issues/2325#issuecomment-209288070
+vmap <LeftRelease> "*ygv
