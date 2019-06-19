@@ -6,8 +6,10 @@
   "coc.preferences.hoverTarget": "float",
   "coc.preferences.enableFloatHighlight": true,
   "coc.source.file.ignoreHidden": false,
-  "coc.preferences.formatOnSaveFiletypes": ["python"],
-  "coc.preferences.formatOnType": true,
+  // disable autoformatting, for now, invoke manually until/unless the codebase
+  // I normally work in adopts a format.
+  // "coc.preferences.formatOnSaveFiletypes": ["python"],
+  // "coc.preferences.formatOnType": true,
 
   // https://github.com/neoclide/coc-python
   // disable jedi so the extension downloads/installs mpls
