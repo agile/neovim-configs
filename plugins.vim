@@ -44,6 +44,8 @@ Plug 'rust-lang/rust.vim'
 Plug 'derekwyatt/vim-scala'
 " typesafe config
 Plug 'GEVerding/vim-hocon'
+" python formatter
+" Plug 'python/black'
 
 " Initialize plugin system
 call plug#end()
