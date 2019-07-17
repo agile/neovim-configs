@@ -148,5 +148,10 @@ let g:airline_extensions = ['branch', 'hunks', 'coc']
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),-1)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),-1)}'
 
-" install coc extensions
-call coc#add_extension('coc-json', 'coc-yaml', 'coc-diagnostic', 'coc-python')
+" coc extensions to install
+let g:coc_global_extensoins = [
+   \'coc-json',
+   \'coc-yaml',
+   \'coc-diagnostic',
+   \'coc-python',
+ \]
