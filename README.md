@@ -5,7 +5,8 @@
 This is basically my ~/.config/nvim directory
 
 I'm running the nightly build of [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
-([ppa](https://launchpad.net/~neovim-ppa/+archive/ubuntu/unstable))
+([ppa](https://launchpad.net/~neovim-ppa/+archive/ubuntu/unstable)), the main reason is that neovim
+before 4.x does not have support for floating windows.
 
 Plain neovim is nice, but [there are many different UI's available](https://github.com/neovim/neovim/wiki/Related-projects#gui)
 The GUI I'm currently using is [neovim-gtk](https://github.com/daa84/neovim-gtk)
@@ -26,11 +27,15 @@ script instead:
 
 ```sh
 #!/bin/bash
+# Update courier and metals, the scala language server
 # https://scalameta.org/metals/docs/editors/vim.html#installing-vim
 
-# default=0.5.2
-current="0.5.2+9-f28c35ac-SNAPSHOT"
+current="0.7.0"
+current="0.7.0+45-2d3960b4-SNAPSHOT"
 default="${version:-"${current}"}"
+
+echo "grabbing latest version of coursier"
+curl -sSLo ~/bin/coursier https://git.io/coursier && chmod 755 ~/bin/coursier
 
 scala=2.12
 version="${version:-$default}"
@@ -38,6 +43,8 @@ repo="sonatype:releases"
 if [[ "${version}" == *SNAPSHOT* ]]; then
   repo="sonatype:snapshots"
 fi
+
+echo "updating metals to version ${current}"
 
 coursier bootstrap \
   --java-opt -Xss4m \
@@ -70,6 +77,10 @@ pyenv which python  # Note the path
 ### things I'm forgetting
 
 TODO
+
+it's been a lifetime since I've really done anything in js, but I still use [nvm](https://github.com/nvm-sh/nvm) to manage node..
+I think most of what I didn't explcitly write about in here are covered going through the coc docs: https://github.com/neoclide/coc.nvim#table-of-contents
+
 
 ## Language Servers
 
