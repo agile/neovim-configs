@@ -5,11 +5,11 @@
 This is basically my ~/.config/nvim directory
 
 I'm running the nightly build of [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
-([ppa](https://launchpad.net/~neovim-ppa/+archive/ubuntu/unstable)), the main reason is that neovim
-before 4.x does not have support for floating windows.
+([ppa](https://launchpad.net/~neovim-ppa/+archive/ubuntu/unstable)), the main
+reason is that neovim before 4.x does not have support for floating windows.
 
 Plain neovim is nice, but [there are many different UI's available](https://github.com/neovim/neovim/wiki/Related-projects#gui)
-The GUI I'm currently using is [neovim-gtk](https://github.com/daa84/neovim-gtk)
+The GUI I'm currently using is [neovim-gtk](https://github.com/daa84/neovim-gtk).
 
 ## Setup
 
@@ -21,9 +21,8 @@ some of the things I do remember:
 
 The [instructions](https://scalameta.org/metals/docs/editors/vim.html#generating-metals-binary)
 for setting up metals gives a similar command line to this for grabbing the jar,
-but I already have [coursier](https://github.com/coursier/coursier), like to
-keep it in `~/bin` and frequently update to the latest SNAPSHOT so I use this
-script instead:
+but I ike to keep it in `~/bin` and frequently update to the latest SNAPSHOT so
+I use this script instead:
 
 ```sh
 #!/bin/bash
@@ -92,3 +91,21 @@ see what it was like.
 ### Scala
 
 For Scala, I'm using [metals](https://scalameta.org/metals/docs/editors/vim.html)
+
+### Python
+
+For python, I'm using the [coc-python](https://github.com/neoclide/coc-python)
+extension configured to use the Microsoft Python Language Server, which it
+automatically handles downloading, updating and running without me doing
+anything.
+
+One maybe quirky thing I've needed to do while working is when I start working
+with a new project, the first time I open the editor in the project dir, I need
+to tell coc-nvim which python interpretor to use:
+
+    :CocCommand python.setInterpreter
+
+It'll tell you what it's currently set to and bring up a list to give you the
+option to choose another. I believe this ends up getting stored in
+`~/.config/coc/memos.json` so you don't need to do it but the once or when you
+want to change it.
