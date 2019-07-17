@@ -2,11 +2,12 @@ let mapleader = ","
 let g:python_host_prog = '~/.pyenv/versions/neovim2/bin/python'
 let g:python3_host_prog = '~/.pyenv/versions/neovim3/bin/python'
 
-" ALE config
-let g:ale_set_baloons = 1
-" Tell airline to enable ALE info
-let g:airline#extensions#ale#enabled = 1
-let g:ale_open_list = 1
+" not using ale anymore..
+" " ALE config
+" let g:ale_set_baloons = 1
+" " Tell airline to enable ALE info
+" let g:airline#extensions#ale#enabled = 1
+" let g:ale_open_list = 1
 
 source ~/.config/nvim/plugins.vim
 source ~/.config/nvim/coc-settings.vim
