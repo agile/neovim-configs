@@ -148,6 +148,10 @@ let g:airline_extensions = ['branch', 'hunks', 'coc']
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),-1)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),-1)}'
 
+" disable vim-go :GoDef short cut (gd)
+" this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0
+
 " coc extensions to install
 let g:coc_global_extensoins = [
    \'coc-json',
