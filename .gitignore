@@ -42,3 +42,5 @@ luac.out
 # Netrw history
 .netrwhist
 
+# packer compiled lua
+plugin/*lua
