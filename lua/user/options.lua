@@ -1,14 +1,5 @@
 vim.g.mapleader = ","
 
---  tab settings
-vim.opt.expandtab = true                        -- should tab characters be replaced with spaces? (ctrl-v)
-vim.opt.autoindent = true                       -- should lines be automatically indented
-vim.opt.smartindent = true                      -- does the right thing (mostly) in programs
-vim.opt.cindent = true                          -- stricter rules for C programs
-vim.opt.tabstop = 2                             -- number of spaces a <Tab> counts for in file
-vim.opt.shiftwidth = 2                          -- indenting is 2 spaces
-vim.opt.softtabstop = 2                         -- number of space for tabbing while editing
-
 -- :help options
 vim.opt.fileencoding = "utf-8"                  -- the encoding written to a file
 vim.opt.backup = false                          -- should a backup file be created?
@@ -19,6 +10,15 @@ vim.opt.writebackup = false                     -- if a file is being edited by 
 vim.opt.clipboard = "unnamedplus"               -- allows neovim to access the system clipboard
 vim.opt.ignorecase = true                       -- should casing be ignored when searching (and replacing!)
 -- vim.opt.smartcase = true                     -- don't ignore case with capitals
+
+--  tab settings
+vim.opt.expandtab = true                        -- should tab characters be replaced with spaces? (ctrl-v)
+vim.opt.autoindent = true                       -- should lines be automatically indented
+vim.opt.smartindent = true                      -- does the right thing (mostly) in programs
+vim.opt.cindent = true                          -- stricter rules for C programs
+vim.opt.tabstop = 2                             -- number of spaces a <Tab> counts for in file
+vim.opt.shiftwidth = 2                          -- indenting is 2 spaces
+vim.opt.softtabstop = 2                         -- number of space for tabbing while editing
 
 -- ui-y sort of things.. 
 vim.opt.mouse = "a"                             -- allow the mouse to be used in neovim
