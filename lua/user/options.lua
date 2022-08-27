@@ -20,10 +20,10 @@ vim.opt.tabstop = 2                             -- number of spaces a <Tab> coun
 vim.opt.shiftwidth = 2                          -- indenting is 2 spaces
 vim.opt.softtabstop = 2                         -- number of space for tabbing while editing
 
--- ui-y sort of things.. 
+-- ui-y sort of things..
 vim.opt.mouse = "a"                             -- allow the mouse to be used in neovim
 vim.opt.termguicolors = true                    -- set term gui colors (most terminals support this)
-vim.opt.showtabline = 1                         -- only show tabs if we're using them.. 
+vim.opt.showtabline = 1                         -- only show tabs if we're using them..
 vim.opt.showmode = true                         -- should things like -- INSERT -- be displayed in the status bar?
 vim.opt.cmdheight = 2                           -- more space in the neovim command line for displaying messages
 vim.opt.pumheight = 10                          -- pop up menu height
@@ -41,6 +41,7 @@ vim.opt.guifont = "monospace:h17"               -- the font used in graphical ne
 vim.opt.shortmess:append "c"                    -- don't show ins-completion-menu msgs
 vim.opt.conceallevel = 0                        -- so that `` is visible in markdown files
 vim.opt.hlsearch = false                        -- should search matches be highlighted?
+vim.opt.foldenable = false                      -- should folds be enabled?
 
 vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
 
