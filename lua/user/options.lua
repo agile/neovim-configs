@@ -32,12 +32,18 @@ vim.opt.splitright = false                      -- should vertical splits to go 
 vim.opt.cursorline = true                       -- should hte current line be highlighted
 vim.opt.number = false                          -- should the (line) number column be displayed?
 vim.opt.relativenumber = false                  -- should the number column show relative numbered lines?
-vim.opt.numberwidth = 4                         -- set number column width to 2 {default 4}
-vim.opt.signcolumn = "yes"                      -- when to show the sign col, yes:always, no:never, auto:when-needed, number:use-number col if present else auto
+vim.opt.numberwidth = 2                         -- set number column width to 2 {default 4}
+vim.opt.signcolumn = "auto"                     -- when to show the sign col, yes:always, no:never, auto:when-needed, number:use-number col if present else auto
 vim.opt.wrap = false                            -- should long lines wrap to the next line?
 vim.opt.scrolloff = 8                           -- minimum lines of context to keep above/below cursor while scrolling
 vim.opt.sidescrolloff = 8                       -- minimum columns of context to keep before/after cursor while side-scrolling
-vim.opt.guifont = "monospace:h17"               -- the font used in graphical neovim applications
+-- vim.opt.guifont = "Hack Nerd Font"           -- the font used in graphical neovim applications
+vim.opt.guifont = "FiraCode Nerd Font"          -- the font used in graphical neovim applications
+if vim.g.neovide then
+  vim.g.neovide_cursor_trail_length = 0         -- disable ghosting effect on cursor
+  vim.g.neovide_cursor_animation_length = 0     -- disable cursor animations
+  vim.g.neovide_input_use_logo = true          -- mess with the super/cmd key?
+end
 vim.opt.shortmess:append "c"                    -- don't show ins-completion-menu msgs
 vim.opt.conceallevel = 0                        -- so that `` is visible in markdown files
 vim.opt.hlsearch = false                        -- should search matches be highlighted?
