@@ -56,6 +56,30 @@ return packer.startup(function(use)
   use { "catppuccin/nvim", as = "catppuccin" }
   use "rktjmp/lush.nvim"
 
+  -- use "hrsh7th/nvim-cmp"       -- Basic completion support
+  use({
+    -- this one looks pretty neat, but didn't seem to work?
+    "hrsh7th/nvim-cmp",       -- Basic completion support
+    requires = {
+      "KadoBOT/cmp-plugins",
+      config = function()
+        require("cmp-plugins").setup({ files = { "plugins.lua", "lua/plugins" } })
+      end,
+    },
+  })
+
+  use "hrsh7th/cmp-buffer"     -- Buffer completions
+  use "hrsh7th/cmp-path"       -- Path completions
+  use "hrsh7th/cmp-cmdline"    -- Command line completions
+  use "hrsh7th/cmp-calc"       -- Math completions
+  use "hrsh7th/cmp-nvim-lua"   -- Lua API completions
+  use "lttr/cmp-jira"          -- JIRA completions
+
+  use "L3MON4D3/LuaSnip"       -- Snippet Completions
+  use "rafamadriz/friendly-snippets"  -- collection of snippets
+
+  use "onsails/lspkind.nvim"   -- symbols for diagnostics/menus
+
   -- support for .editorconfig files https://editorconfig.org/
   use "editorconfig/editorconfig-vim"
 
