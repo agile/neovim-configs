@@ -45,9 +45,19 @@ return packer.startup(function(use)
   use "nvim-lua/popup.nvim"    -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim"  -- Useful lua functions used by lots of plugins
 
+  use "mortepau/codicons.nvim"  -- icon fonts
+
+  -- color themes
+  use "folke/tokyonight.nvim"
+  use "rafi/awesome-vim-colorschemes"
+  use "bluz71/vim-moonfly-colors"
+  use "bluz71/vim-nightfly-guicolors"
+  use "rockerBOO/boo-colorscheme-nvim"
+  use { "catppuccin/nvim", as = "catppuccin" }
+  use "rktjmp/lush.nvim"
+
   -- support for .editorconfig files https://editorconfig.org/
   use "editorconfig/editorconfig-vim"
-
 
 
   -- Automatically set up your configuration after cloning packer.nvim
