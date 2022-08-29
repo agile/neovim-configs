@@ -48,41 +48,50 @@ return packer.startup(function(use)
   use "mortepau/codicons.nvim"  -- icon fonts
 
   -- color themes
-  use "folke/tokyonight.nvim"
-  use "rafi/awesome-vim-colorschemes"
-  use "bluz71/vim-moonfly-colors"
-  use "bluz71/vim-nightfly-guicolors"
-  use "rockerBOO/boo-colorscheme-nvim"
-  use { "catppuccin/nvim", as = "catppuccin" }
-  use "rktjmp/lush.nvim"
+  use {
+    "folke/tokyonight.nvim",
+    "rafi/awesome-vim-colorschemes",
+    "bluz71/vim-moonfly-colors",
+    "bluz71/vim-nightfly-guicolors",
+    "rockerBOO/boo-colorscheme-nvim",
+    { "catppuccin/nvim", as = "catppuccin" },
+    "rktjmp/lush.nvim",
+  }
 
-  -- use "hrsh7th/nvim-cmp"       -- Basic completion support
-  use({
-    -- this one looks pretty neat, but didn't seem to work?
-    "hrsh7th/nvim-cmp",       -- Basic completion support
+  use {
+    "hrsh7th/nvim-cmp",         -- Basic completion support
     requires = {
-      "KadoBOT/cmp-plugins",
-      config = function()
-        require("cmp-plugins").setup({ files = { "plugins.lua", "lua/plugins" } })
-      end,
+      "hrsh7th/cmp-buffer",     -- Buffer completions
+      "hrsh7th/cmp-path",       -- Path completions
+      "hrsh7th/cmp-cmdline",    -- Command line completions
+      "hrsh7th/cmp-calc",       -- Math completions
+      "hrsh7th/cmp-nvim-lua",   -- Lua API completions
+      "hrsh7th/cmp-nvim-lsp",   -- LSP completions
+      "lttr/cmp-jira",          -- JIRA completions
+      "onsails/lspkind.nvim",   -- symbols for diagnostics/menus
+      {
+        "L3MON4D3/LuaSnip",     -- Snippet Completions
+        requires = { "rafamadriz/friendly-snippets" },
+      },
+      {
+        "KadoBOT/cmp-plugins",
+        config = function()
+          require("cmp-plugins").setup({ files = { "lua/user/plugins.lua" } })
+        end,
+      }
     },
-  })
-
-  use "hrsh7th/cmp-buffer"     -- Buffer completions
-  use "hrsh7th/cmp-path"       -- Path completions
-  use "hrsh7th/cmp-cmdline"    -- Command line completions
-  use "hrsh7th/cmp-calc"       -- Math completions
-  use "hrsh7th/cmp-nvim-lua"   -- Lua API completions
-  use "lttr/cmp-jira"          -- JIRA completions
-
-  use "L3MON4D3/LuaSnip"       -- Snippet Completions
-  use "rafamadriz/friendly-snippets"  -- collection of snippets
-
-  use "onsails/lspkind.nvim"   -- symbols for diagnostics/menus
+  }
 
   -- support for .editorconfig files https://editorconfig.org/
   use "editorconfig/editorconfig-vim"
 
+  -- LSP support
+  use {
+    -- "williamboman/mason.nvim",            -- Installers for varous LSPs
+    -- "williamboman/mason-lspconfig.nvim",  -- Basic LSP configurations
+    "neovim/nvim-lspconfig",                 -- Basic LSP configurations
+    "williamboman/nvim-lsp-installer",       -- TODO: refactor to use Mason
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

@@ -197,6 +197,7 @@ cmp.setup {
   },
   sources = {
     { name = "cmp_jira" },
+    { name = "nvim_lsp" },
     { name = "plugins" },
     { name = "nvim_lua" },
     { name = "luasnip" },
