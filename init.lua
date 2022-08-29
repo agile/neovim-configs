@@ -5,6 +5,7 @@ require "user.colorscheme"
 require "user.completions"
 require "user.lsp"
 require "user.autocmds"
+require "user.telescope"
 
 
 -- TODO: rewrite these in lua
