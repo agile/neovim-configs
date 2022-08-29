@@ -6,6 +6,7 @@ require "user.completions"
 require "user.lsp"
 require "user.autocmds"
 require "user.telescope"
+require "user.treesitter"
 
 
 -- TODO: rewrite these in lua
