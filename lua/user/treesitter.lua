@@ -9,6 +9,10 @@ configs.setup {
     additional_vim_regex_highlighting = true,
 
   },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+  },
   indent = { enable = true, disable = { "yaml" } },
   autopairs = {
     enable = true,

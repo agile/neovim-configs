@@ -8,6 +8,7 @@ require "user.autocmds"
 require "user.telescope"
 require "user.treesitter"
 require "user.autopairs"
+require "user.comments"
 
 
 -- TODO: rewrite these in lua

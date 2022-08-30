@@ -104,6 +104,7 @@ return packer.startup(function(use)
     requires = {
       "p00f/nvim-ts-rainbow",
       "nvim-treesitter/playground",
+      "JoosepAlviste/nvim-ts-context-commentstring"
     }
   }
 
@@ -111,6 +112,8 @@ return packer.startup(function(use)
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
   }
+
+  use "numToStr/Comment.nvim" -- Easily comment stuff
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
