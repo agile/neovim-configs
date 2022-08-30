@@ -10,6 +10,7 @@ require "user.treesitter"
 require "user.autopairs"
 require "user.comments"
 require "user.gitsigns"
+require "user.nvim-tree"
 
 
 -- TODO: rewrite these in lua
