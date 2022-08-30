@@ -7,6 +7,7 @@ require "user.lsp"
 require "user.autocmds"
 require "user.telescope"
 require "user.treesitter"
+require "user.autopairs"
 
 
 -- TODO: rewrite these in lua
