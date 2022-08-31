@@ -88,6 +88,18 @@ M.on_attach = function(client, bufnr)
   if client.name == "tsserver" then
     client.resolved_capabilities.document_formatting = false
   end
+  -- Dynamically setup pyright to work with venvs
+  if client.name == "pyright" then
+    local venv_name = vim.trim(vim.fn.system("pyenv version-name"))
+    if venv_name ~= "system" then
+      local pyver = vim.trim(vim.fn.system("python -c 'import sys; print(\".\".join(map(str, sys.version_info[0:2])))'"))
+
+      client.config.settings.python.venvPath = vim.trim(vim.fn.system("pyenv root")) .. "/versions"
+      client.config.settings.python.venv = venv_name
+      client.config.settings.python.pythonVersion = pyver
+    end
+    -- print(vim.inspect(client.config.settings.python))
+  end
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
 end
