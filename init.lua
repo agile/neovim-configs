@@ -13,6 +13,7 @@ require "user.gitsigns"
 require "user.nvim-tree"
 require "user.bufferline"
 require "user.fontzoom"
+require "user.lualine"
 
 
 -- TODO: rewrite these in lua
