@@ -37,8 +37,6 @@ vim.opt.signcolumn = "auto"                     -- when to show the sign col, ye
 vim.opt.wrap = false                            -- should long lines wrap to the next line?
 vim.opt.scrolloff = 8                           -- minimum lines of context to keep above/below cursor while scrolling
 vim.opt.sidescrolloff = 8                       -- minimum columns of context to keep before/after cursor while side-scrolling
--- vim.opt.guifont = "Hack Nerd Font"           -- the font used in graphical neovim applications
-vim.opt.guifont = "FiraCode Nerd Font"          -- the font used in graphical neovim applications
 if vim.g.neovide then
   vim.g.neovide_cursor_trail_length = 0         -- disable ghosting effect on cursor
   vim.g.neovide_cursor_animation_length = 0     -- disable cursor animations
