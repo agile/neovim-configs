@@ -1,4 +1,5 @@
-local colorscheme = "catppuccin"
+local colorscheme = "tokyonight"
+-- local colorscheme = "catppuccin"
 
 -- other settings documented here:
 -- https://github.com/folke/tokyonight.nvim#%EF%B8%8F-configuration
