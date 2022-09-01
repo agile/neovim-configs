@@ -52,6 +52,9 @@ vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
 vim.opt.timeoutlen = 1000                       -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.updatetime = 300                        -- faster completion (4000ms default)
 
+vim.g.python3_host_prog = "~/.pyenv/versions/neovim_3.8.13/bin/python"
+vim.g.ruby_host_prog = "~/.rbenv/versions/3.1.2/bin/neovim-ruby-host"
+
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]                    -- treat hyphenated words as a complete word vs individual words between hyphens
