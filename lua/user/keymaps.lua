@@ -84,3 +84,4 @@ keymap("v", ">", ">gv", opts)
 
 -- Nvimtree
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
+keymap("n", "<leader>f", ":Format<cr>", opts)

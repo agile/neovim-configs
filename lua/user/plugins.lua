@@ -91,6 +91,7 @@ return packer.startup(function(use)
     -- "williamboman/mason-lspconfig.nvim",  -- Basic LSP configurations
     "neovim/nvim-lspconfig",                 -- Basic LSP configurations
     "williamboman/nvim-lsp-installer",       -- TODO: refactor to use Mason
+    "jose-elias-alvarez/null-ls.nvim",       -- for formatters and linters
   }
 
   -- Telescope
