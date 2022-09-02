@@ -16,6 +16,7 @@ require "user.fontzoom"
 require "user.lualine"
 require "user.toggleterm"
 require "user.impatient"
+require "user.indent-blankline"
 
 
 -- TODO: rewrite these in lua
