@@ -14,6 +14,7 @@ require "user.nvim-tree"
 require "user.bufferline"
 require "user.fontzoom"
 require "user.lualine"
+require "user.toggleterm"
 
 
 -- TODO: rewrite these in lua
