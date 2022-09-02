@@ -137,6 +137,8 @@ return packer.startup(function(use)
     "akinsho/toggleterm.nvim", tag = 'v2.*'
   }
 
+  use "lewis6991/impatient.nvim"
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
