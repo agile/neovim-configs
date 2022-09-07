@@ -11,7 +11,7 @@ but [there are many different UI's available](https://github.com/neovim/neovim/w
 
 
 Most of this was at least initially done while going through chris@machine's series of videos on:
-[Nevim form Scratch](https://www.youtube.com/playlist?list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ)
+[Neovim from Scratch](https://www.youtube.com/playlist?list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ)
 
 
 ### Notes and Nits I'm still working out
@@ -39,34 +39,33 @@ Currently flipping between:
 Main grips are trivial things like handles/frames around panes, tables not
 really being well defined/visible. Probably things I can easily fix after looking into it.
 
-
 ### Pyenv, Pyright...
 
 Issues with pyright vs pyenv are basically that pyright does not automagicallygv
 know when I'm in a project using a venv so it's unable to resolve imports, etc.
 
 My attempts [to dynamically configure pyright](https://github.com/agile/neovim-configs/commit/c18fd6f22ff6a6bf5f7c8cad3127869fc0b5247d)
-were unsuccessful but creating a `pyrightconifg.json` (via https://github.com/alefpereira/pyenv-pyright)
+were unsuccessful.
+
+Update: creating a `pyrightconifg.json` (via https://github.com/alefpereira/pyenv-pyright)
 appears to fix it so I'm thinking to add a `pyenv pyright` statement to python
 project's `.envrc` so that direnv always ensures it's up to date when I enter
-the project dir.
+the project dir and add an ignore for the json config.
 
 ### Copy/Paste issues
 
 Copy/Paste is still a mixed bag, and I think part of this is simply a different
 experience on macos vs linux since I'm doing this lua setup from a mac now, but
-for some reason it's not working in neovide? but does in kitty? Oh, also sometimes
-pasting in neovide translates newlines into ye ol dos/win carriage returns (; what the heck?)
-  - https://github.com/neovide/neovide/discussions/1220 maybe a fix..
+for some reason it's not working in neovide? but does in kitty (terminal)? Oh,
+also sometimes pasting in neovide translates newlines into ye ol dos/win carriage
+returns (; what the heck?)
+  - https://github.com/neovide/neovide/discussions/1220
+    might a fix for some of the weirdness.
 
 ## TODO
 
   In no particular order, maybe, these are some of the next things I intend to do..
 
-* PIN THE PLUGINS :P, it's like a timebomb right now as every time I touch plugins.lua, packer's going
-  to sync up and apply the latest updates and some of these things are likely to have breaking changes
-  I would much rather handle the upgrades manually or decide which things I'd be fine with riding
-  on the edge.
 * I went through chris@machine's Neovim from Scratch series: https://www.youtube.com/playlist?list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ
   seems a number of things should be updated..
   - keymaps should now use vim.keymaps vs vim.api.nvim_set_keymap
@@ -81,3 +80,7 @@ pasting in neovide translates newlines into ye ol dos/win carriage returns (; w
 * Integrations for more languages
 * Vimified version of the configs I can use on machines where nvim is not available.
 * Host based overrides
+* PIN THE PLUGINS :P, it's like a timebomb right now as every time I touch plugins.lua, packer's going
+  to sync up and apply the latest updates and some of these things are likely to have breaking changes
+  I would much rather handle the upgrades manually or decide which things I'd be fine with riding
+  on the edge.
