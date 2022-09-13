@@ -137,7 +137,9 @@ return packer.startup(function(use)
     "akinsho/toggleterm.nvim", tag = 'v2.*'
   }
 
-  use "lewis6991/impatient.nvim"
+  use "lewis6991/impatient.nvim" -- speedup tricks
+
+  use 'echasnovski/mini.nvim' -- many little conveniences/plugins
 
   use "lukas-reineke/indent-blankline.nvim"
 
