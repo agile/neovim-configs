@@ -18,6 +18,7 @@ require "user.toggleterm"
 require "user.impatient"
 require "user.indent-blankline"
 require "user.mini-trailspace"
+require "user.markdownpreview"
 
 
 -- TODO: rewrite these in lua
