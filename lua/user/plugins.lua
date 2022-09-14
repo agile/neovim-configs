@@ -63,6 +63,10 @@ return packer.startup(function(use)
     requires = { "kyazdani42/nvim-web-devicons", opt = true },
   }
 
+  use "lewis6991/gitsigns.nvim" -- git status markers
+  use "lukas-reineke/indent-blankline.nvim" -- indention guide markers
+
+  -- completions
   use {
     "hrsh7th/nvim-cmp",         -- Basic completion support
     requires = {
@@ -86,6 +90,8 @@ return packer.startup(function(use)
       }
     },
   }
+  use "windwp/nvim-autopairs" -- automatically add corresponding quote/bracket/etc
+  use "numToStr/Comment.nvim" -- Easily comment stuff
 
   -- support for .editorconfig files https://editorconfig.org/
   use "editorconfig/editorconfig-vim"
@@ -114,34 +120,26 @@ return packer.startup(function(use)
     }
   }
 
-  use {
-    "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup {} end
-  }
-
-  use "numToStr/Comment.nvim" -- Easily comment stuff
-
-  use "lewis6991/gitsigns.nvim"
-
+  -- File explorer
   use {
     "kyazdani42/nvim-tree.lua",
     requires = { "kyazdani42/nvim-web-devicons" },
   }
 
+  -- buffer/tab decorations/styles
   use {
     "akinsho/bufferline.nvim",
     "moll/vim-bbye",
   }
 
   use {
-    "akinsho/toggleterm.nvim", tag = 'v2.*'
+    "akinsho/toggleterm.nvim", tag = 'v2.*' -- quick shortcuts for terminals
   }
 
   use "lewis6991/impatient.nvim" -- speedup tricks
 
   use 'echasnovski/mini.nvim' -- many little conveniences/plugins
 
-  use "lukas-reineke/indent-blankline.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
