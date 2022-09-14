@@ -103,6 +103,7 @@ return packer.startup(function(use)
     "neovim/nvim-lspconfig",                 -- Basic LSP configurations
     "williamboman/nvim-lsp-installer",       -- TODO: refactor to use Mason
     "jose-elias-alvarez/null-ls.nvim",       -- for formatters and linters
+    "nanotee/sqls.nvim",                     -- SQL LSP!
   }
 
   -- Telescope

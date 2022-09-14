@@ -1,48 +1,7 @@
-local ok, lspconfig = pcall(require, "lspconfig")
-if not ok then
-    return
-end
+require("user.lsp.configs")           -- where LSP servers are configured, sometimes installed
+require("user.lsp.handlers").setup()  -- generalized on_attach/capabilities/keymaps
+require "user.lsp.null-ls"            -- formatters/linters
 
-require("user.lsp.configs")
-require("user.lsp.handlers").setup()
-require "user.lsp.null-ls"
-
-
--- local meson_ok, meson = pcall(require, "mason")
--- if not meson_ok then
---   return
--- end
--- require("mason").setup({
--- })
---
---
---
--- require("mason-lspconfig").setup({
---   ensure_installed = {
---     "sumneko_lua",
---   }
---   -- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
---   -- This setting has no relation with the `ensure_installed` setting.
---   -- Can either be:
---   --   - false: Servers are not automatically installed.
---   --   - true: All servers set up via lspconfig are automatically installed.
---   --   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
---   --       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
---   automatic_installation = false,
--- })
---
---
---
---
---
---
---
---
---
---
---
---
---
---
---
---
+-- TODO
+-- https://www.reddit.com/r/neovim/comments/w5h9tl/lsp_linesnvim_v2_is_out/
+-- ^ show LSP diagnostics via virtual lines (github mirror: https://github.com/Maan2003/lsp_lines.nvim)
