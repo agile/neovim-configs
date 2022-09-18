@@ -60,7 +60,7 @@ for some reason it's not working in neovide? but does in kitty (terminal)? Oh,
 also sometimes pasting in neovide translates newlines into ye ol dos/win carriage
 returns (; what the heck?)
   - https://github.com/neovide/neovide/discussions/1220
-    might a fix for some of the weirdness.
+    this definitely helps, there's still some weirdness
 
 ## TODO
 

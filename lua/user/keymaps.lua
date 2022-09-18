@@ -85,3 +85,26 @@ keymap("v", ">", ">gv", opts)
 -- Nvimtree
 keymap("n", "<leader>e", ":NvimTreeToggle<cr>", opts)
 keymap("n", "<leader>f", ":Format<cr>", opts)
+
+-- Fix copy/paste while in neovide on a mac
+if vim.g.neovide then
+  vim.g.neovide_input_use_logo = true
+  -- copy
+  -- vnoremap <D-c> "+y
+  keymap("v", "<D-c>", '"+y', opts)
+
+  -- paste
+  -- nnoremap <D-v> "+p
+  -- inoremap <D-v> <Esc>"+pa
+  -- cnoremap <D-v> <c-r>+
+  keymap("n", "<D-v>", '"+p', opts)
+  keymap("i", "<D-v>", '<Esc>"+pa', opts)
+  keymap("c", "<D-v>", '<c-r>+', opts)
+  keymap('t', '<D-v>', '<c-\\><c-n>"+pa', opts)
+
+  -- undo
+  -- nnoremap <D-z> u
+  -- inoremap <D-z> <Esc>ua
+  keymap("n", "<D-z>", 'u', opts)
+  keymap("i", "<D-z>", '<Esc>ua', opts)
+end
