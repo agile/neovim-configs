@@ -105,6 +105,9 @@ return packer.startup(function(use)
     "williamboman/nvim-lsp-installer",       -- TODO: refactor to use Mason
     "jose-elias-alvarez/null-ls.nvim",       -- for formatters and linters
     "nanotee/sqls.nvim",                     -- SQL LSP!
+    { 'scalameta/nvim-metals',               -- SCALA/JAVA/SBT
+      requires = { "nvim-lua/plenary.nvim" },
+    },
   }
 
   -- Telescope https://github.com/nvim-telescope/telescope.nvim
