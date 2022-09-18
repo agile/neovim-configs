@@ -29,7 +29,7 @@ vim.opt.cmdheight = 2                           -- more space in the neovim comm
 vim.opt.pumheight = 10                          -- pop up menu height
 vim.opt.splitbelow = false                      -- should horizontal splits to go below current window
 vim.opt.splitright = false                      -- should vertical splits to go to the right of current window
-vim.opt.cursorline = true                       -- should hte current line be highlighted
+vim.opt.cursorline = true                       -- should the current line be highlighted
 vim.opt.number = false                          -- should the (line) number column be displayed?
 vim.opt.relativenumber = false                  -- should the number column show relative numbered lines?
 vim.opt.numberwidth = 2                         -- set number column width to 2 {default 4}
@@ -43,8 +43,9 @@ if vim.g.neovide then
   vim.g.neovide_input_use_logo = true          -- mess with the super/cmd key?
 end
 vim.opt.shortmess:append "c"                    -- don't show ins-completion-menu msgs
+vim.opt.shortmess:remove "F"                    -- allow file info to be shown when editing a file (https://github.com/scalameta/nvim-metals#user-content-fn-shortmess-93d16b9f1b9fd41fbf9d9580a948d581)
 vim.opt.conceallevel = 0                        -- so that `` is visible in markdown files
-vim.opt.hlsearch = false                        -- should search matches be highlighted?
+vim.opt.hlsearch = true                         -- should search matches be highlighted?
 vim.opt.foldenable = false                      -- should folds be enabled?
 
 vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp
