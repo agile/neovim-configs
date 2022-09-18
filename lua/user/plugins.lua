@@ -107,9 +107,11 @@ return packer.startup(function(use)
     "nanotee/sqls.nvim",                     -- SQL LSP!
   }
 
-  -- Telescope
+  -- Telescope https://github.com/nvim-telescope/telescope.nvim
   use {
     "nvim-telescope/telescope.nvim",
+    -- branch = "0.1.x",
+    requires = { "nvim-lua/plenary.nvim" }
   }
 
   -- TreeSitter
