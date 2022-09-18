@@ -20,7 +20,7 @@ local tokyonight_config = {
   on_colors = function(colors)
     colors.hint = colors.purple
     -- colors.error = "#FF0000"
-    colors.bg = "#09091A" -- "#000000"
+    colors.bg = "#060609" -- "#000000"
     colors.bg_dark = "#000000"
     colors.bg_sidebar = "#000000"
   end,
