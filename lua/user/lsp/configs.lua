@@ -63,11 +63,12 @@ lsp_installer.setup({
 --   automatic_installation = false,
 -- })
 
--- Here we'll iterate through the above table of servers
+local on_attach = require("user.lsp.handlers").on_attach
+local capabilities = require("user.lsp.handlers").capabilities
 for _, server in pairs(auto_installed_servers) do
 	local opts = {
-		on_attach = require("user.lsp.handlers").on_attach,
-		capabilities = require("user.lsp.handlers").capabilities,
+		on_attach = on_attach,
+		capabilities = capabilities,
 	}
 	local has_custom_opts, server_custom_opts = pcall(require, "user.lsp.settings." .. server)
 	if has_custom_opts then
