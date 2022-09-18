@@ -36,12 +36,9 @@ Currently flipping between:
 * [tokyonight](https://github.com/folke/tokyonight.nvim) with `night` style.
 * [catpuccin](https://github.com/catppuccin/nvim)
 
-Main grips are trivial things like handles/frames around panes, tables not
-really being well defined/visible. Probably things I can easily fix after looking into it.
+### Pyenv, Pyright, amiright...?
 
-### Pyenv, Pyright...
-
-Issues with pyright vs pyenv are basically that pyright does not automagicallygv
+Issues with pyright vs pyenv are basically that pyright does not automagically
 know when I'm in a project using a venv so it's unable to resolve imports, etc.
 
 My attempts [to dynamically configure pyright](https://github.com/agile/neovim-configs/commit/c18fd6f22ff6a6bf5f7c8cad3127869fc0b5247d)
@@ -78,9 +75,22 @@ returns (; what the heck?)
 * Telescope-ish Zettlekasten https://github.com/renerocksai/telekasten.nvim
 * Create a minimal suite of viml configs I can use when/where nvim is not available.
 * Integrations for more languages
-* Vimified version of the configs I can use on machines where nvim is not available.
 * Host based overrides
 * PIN THE PLUGINS :P, it's like a timebomb right now as every time I touch plugins.lua, packer's going
   to sync up and apply the latest updates and some of these things are likely to have breaking changes
   I would much rather handle the upgrades manually or decide which things I'd be fine with riding
   on the edge.
+* Telescope extensions
+  * https://github.com/pwntester/octo.nvim - edit/review GH issues/prs from nvim
+  * https://github.com/softinio/scaladex.nvim - import/open packages from scaladex scala package index
+  * https://github.com/nvim-telescope/telescope-github.nvim - GH integration with Telescope
+  * https://github.com/crispgm/telescope-heading.nvim - Jump around headings in docs
+  * https://github.com/LinArcX/telescope-env.nvim - Telescope ext for env vars
+  * https://github.com/ANGkeith/telescope-terraform-doc.nvim - Telescope ext to browse terraform docs
+* https://github.com/anuvyklack/windows.nvim - auto-resize windows
+* https://github.com/dccsillag/magma-nvim - jupyter
+* https://github.com/magidc/aerial.nvim - Code outline navigator
+
+
+* https://github.com/magidc/nvim-config - This guy's config looks awesome, lots to draw from here.
+* https://github.com/ThePrimeagen/vim-be-good
