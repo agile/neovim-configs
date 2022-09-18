@@ -14,6 +14,7 @@ telescope.setup {
 
     mappings = {
       i = {
+        ["<C-h>"] = actions.which_key,
         ["<C-n>"] = actions.cycle_history_next,
         ["<C-p>"] = actions.cycle_history_prev,
 
