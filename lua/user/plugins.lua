@@ -56,6 +56,7 @@ return packer.startup(function(use)
     "rockerBOO/boo-colorscheme-nvim",
     { "catppuccin/nvim", as = "catppuccin" },
     "rktjmp/lush.nvim",
+    "NvChad/nvim-colorizer.lua",
   }
   -- status bar
   use {
