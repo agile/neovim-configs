@@ -160,6 +160,8 @@ cmp.setup {
         cmp_jira = "[JIRA]",
         luasnip = "[Snippet]",
         nvim_lsp = "[LSP]",
+        nvim_lsp_signature_help = "[LSPSIG]",
+        nvim_lsp_documentation_help = "[LSPDOC]",
         nvim_lua = "[LUA]",
         path = "[Path]",
         plugins = "[PLUGIN]",
@@ -197,6 +199,8 @@ cmp.setup {
   },
   sources = {
     { name = "cmp_jira" },
+    { name = "nvim_lsp_signature_help" },
+    { name = "nvim_lsp_documentation_help" },
     { name = "nvim_lsp" },
     { name = "plugins" },
     { name = "nvim_lua" },

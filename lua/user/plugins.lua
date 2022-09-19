@@ -77,6 +77,8 @@ return packer.startup(function(use)
       "hrsh7th/cmp-calc",       -- Math completions
       "hrsh7th/cmp-nvim-lua",   -- Lua API completions
       "hrsh7th/cmp-nvim-lsp",   -- LSP completions
+      "hrsh7th/cmp-nvim-lsp-signature-help", -- LSP Signature completions
+      "hrsh7th/cmp-nvim-lsp-document-symbol", -- LSP Signature completions
       "lttr/cmp-jira",          -- JIRA completions
       "onsails/lspkind.nvim",   -- symbols for diagnostics/menus
       {
