@@ -1,3 +1,8 @@
+local _impatient, impatient = pcall(require, "impatient")
+if _impatient then
+    impatient.enable_profile()
+end
+
 require "user.options"
 require "user.keymaps"
 require "user.plugins"
@@ -19,7 +24,6 @@ require "user.impatient"
 require "user.indent-blankline"
 require "user.mini-trailspace"
 require "user.markdownpreview"
-
 
 -- TODO: rewrite these in lua
 vim.cmd "source ~/.config/nvim/mappings.vim"
