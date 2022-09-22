@@ -38,7 +38,9 @@ local mode = {
 
 local filetype = {
 	"filetype",
-	icons_enabled = false,
+	icons_enabled = true,
+  icon_only = true,
+  colored = true,
 	icon = nil,
 }
 
@@ -90,13 +92,18 @@ lualine.setup({
 	tabline = {
   },
   inactive_winbar = {
-		lualine_a = { filename },
-		lualine_b = { diff, spaces, "encoding", filetype },                                   -- default: {"branch", "diff", "diagnostics"}
-		lualine_c = { "location" },                             -- default: {"filename"}
+		lualine_a = { filetype, filename },
+		-- lualine_b = { diff, spaces, "encoding", filetype },                                   -- default: {"branch", "diff", "diagnostics"}
+		lualine_b = { "location", "diagnostics" },                                   -- default: {"branch", "diff", "diagnostics"}
+		lualine_c = {},                             -- default: {"filename"}
 		lualine_x = {},     -- default: {"encoding", "fileformat", "filetype"}
 		lualine_y = {},                               -- default: {"progress"}
 		lualine_z = {},                               -- default: {"location"}
   },
-  winbar = {},
+  winbar = {
+		lualine_a = { filetype, filename },
+		-- lualine_b = { diff, spaces, "encoding", filetype },                                   -- default: {"branch", "diff", "diagnostics"}
+		lualine_b = { "location", "diagnostics" },                             -- default: {"filename"}
+  },
 	extensions = {},
 })

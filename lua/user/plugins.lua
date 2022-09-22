@@ -61,7 +61,7 @@ return packer.startup(function(use)
   -- status bar
   use {
     "nvim-lualine/lualine.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    requires = { "kyazdani42/nvim-web-devicons"},
   }
 
   use "lewis6991/gitsigns.nvim" -- git status markers
