@@ -3,7 +3,7 @@ if _impatient then
     impatient.enable_profile()
 end
 
-local old_config = true
+local old_config = false
 
 if old_config then
   require "user.options"
