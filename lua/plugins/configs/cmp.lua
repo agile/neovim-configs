@@ -83,6 +83,21 @@ cmp.setup {
             select = true
         }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         -- old config included maps for tab/s-tabing..
+        -- I use tabs... some say you should stick to ins-completion but this is just here as an example
+        ["<Tab>"] = function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            fallback()
+          end
+        end,
+        ["<S-Tab>"] = function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            fallback()
+          end
+        end,
     }),
     sources = {
         {name = "cmp_jira"},

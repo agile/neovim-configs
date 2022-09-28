@@ -3,9 +3,9 @@ if not ok then
     return
 end
 
--- Space as leader key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+-- tried space as leader key, stilll prefer comma
+vim.g.mapleader = ','
+vim.g.maplocalleader = ','
 
 local i_opts = {
     mode = "i",
@@ -32,7 +32,7 @@ local n_opts = {
 }
 
 wk.register({
-    [","] = { "@:", "Repeat last command" },
+    -- [","] = { "@:", "Repeat last command" },
     ["<leader>r"] = { "<cmd>reg<cr>", "Show registers" },
     ["<leader>o"] = { "o<ESC>", "New line in normal mode" },
     ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
@@ -58,9 +58,14 @@ wk.register({
     ["<a-h>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
     ["<a-w>"] = { "<cmd>bd<cr>", "[BUFFER] Close current buffer" },
     ["<a-q>"] = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
+
     ["--"] = { "zR", "[FOLDS] Expand all folds" },
     ["_"] = { "zM", "[FOLDS] Close all folds" },
-    ["<leader>f"] = {
+
+
+    ["K"] = {"<cmd>lua vim.lsp.buf.hover()<CR>", "[LSP] Hover"},
+
+    ["<leader>t"] = {
         name = "[TELESCOPE]",
         f = { "<cmd>Telescope find_files hidden=false no_ignore=true<cr>", "[TELESCOPE] Find File" },
         s = { "<cmd>Telescope grep_string<cr>", "[TELESCOPE] Find files using grep in file names" },
@@ -104,17 +109,44 @@ wk.register({
     ["<F11>"] = { "<cmd>lua require'dap'.step_into()<cr>", "[DAP] Step into" },
     ["<F12>"] = { "<cmd>lua require'dap'.step_out()<cr>", "[DAP] Step out" },
 
-    ["<leader>c"] = {
+    ["<leader>l"] = {
         name = "[LSP]",
-        r = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
-        d = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "[LSP] Go to declaration" },
-        f = { "<cmd>lua vim.lsp.buf.definition()<cr>", "[LSP] Go to definition" },
-        i = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "[LSP] Go to implementation" },
+        gr = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
+        gd = { "<cmd>lua vim.lsp.buf.definition()<cr>", "[LSP] Go to definition" },
+        gD = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "[LSP] Go to declaration" },
+        gi = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "[LSP] Go to implementation" },
         a = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
-        v = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
-        h = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
-        c = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "[LSP] Format code" },
-        n = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
+        k = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
+        -- map("n", "<leader>ws", '<cmd>lua require"metals".hover_worksheet()<CR>')
+        s = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", "[LSP] Signature help" },
+        ds = { "<cmd>lua vim.lsp.buf.document_symbol()<CR>", "[LSP] Document symbol" },
+        ws = { "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", "[LSP] Workspace symbol" },
+        f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "[LSP] Format code" },
+        rn = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
+        -- rn = { "<cmd>lua vim.lsp.buf.rename()<CR>", "[LSP] Rename"},
+
+        ca = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
+        -- ca = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "[LSP] Code actions" },
+        cl = { "<cmd>lua vim.lsp.codelens.run()<CR>", "[LSP] Code lens" },
+        -- FIXME: reconcile example metals mappings
+
+        -- map("n", "<leader>aa", "<cmd>lua vim.diagnostic.setqflist()<CR>") -- all workspace diagnostics
+        -- map("n", "<leader>ae", '<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>') -- all workspace errors
+        -- map("n", "<leader>aw", '<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>') -- all workspace warnings
+        -- map("n", "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>") -- buffer diagnostics only
+
+        -- map("n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
+        -- map("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
+
+        -- -- Example mappings for usage with nvim-dap. If you don't use that, you can
+        -- -- skip these
+        -- map("n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
+        -- map("n", "<leader>dr", [[<cmd>lua require"dap".repl.toggle()<CR>]])
+        -- map("n", "<leader>dK", [[<cmd>lua require"dap.ui.widgets".hover()<CR>]])
+        -- map("n", "<leader>dt", [[<cmd>lua require"dap".toggle_breakpoint()<CR>]])
+        -- map("n", "<leader>dso", [[<cmd>lua require"dap".step_over()<CR>]])
+        -- map("n", "<leader>dsi", [[<cmd>lua require"dap".step_into()<CR>]])
+        -- map("n", "<leader>dl", [[<cmd>lua require"dap".run_last()<CR>]])
     },
     ["<leader>j"] = {
         name = "[JDTLS]",
@@ -164,19 +196,19 @@ vim.g.gui_font_size = vim.g.gui_font_default_size
 vim.g.gui_font_face = "DejaVuSansMono Nerd Font"
 
 RefreshGuiFont = function()
-  vim.opt.guifont = string.format("%s:h%s",vim.g.gui_font_face, vim.g.gui_font_size)
+    vim.opt.guifont = string.format("%s:h%s", vim.g.gui_font_face, vim.g.gui_font_size)
 end
 
 ResizeGuiFont = function(delta)
-  if vim.g.gui_font_size + delta > 2 then
-    vim.g.gui_font_size = vim.g.gui_font_size + delta
-  end
-  RefreshGuiFont()
+    if vim.g.gui_font_size + delta > 2 then
+        vim.g.gui_font_size = vim.g.gui_font_size + delta
+    end
+    RefreshGuiFont()
 end
 
-ResetGuiFont = function ()
-  vim.g.gui_font_size = vim.g.gui_font_default_size
-  RefreshGuiFont()
+ResetGuiFont = function()
+    vim.g.gui_font_size = vim.g.gui_font_default_size
+    RefreshGuiFont()
 end
 
 -- Call function on startup to set default value
@@ -186,8 +218,8 @@ ResetGuiFont()
 
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set({'n', 'i'}, "<C-+>", function() ResizeGuiFont(1)  end, opts)
-vim.keymap.set({'n', 'i'}, "<C-->", function() ResizeGuiFont(-1) end, opts)
-vim.keymap.set({'n', 'i'}, "<C-ScrollWheelUp>", function() ResizeGuiFont(1)  end, opts)
-vim.keymap.set({'n', 'i'}, "<C-ScrollWheelDown>", function() ResizeGuiFont(-1) end, opts)
-vim.keymap.set({'n', 'i'}, "<C-BS>", function() ResetGuiFont() end, opts)
+vim.keymap.set({ 'n', 'i' }, "<C-+>", function() ResizeGuiFont(1) end, opts)
+vim.keymap.set({ 'n', 'i' }, "<C-->", function() ResizeGuiFont(-1) end, opts)
+vim.keymap.set({ 'n', 'i' }, "<C-ScrollWheelUp>", function() ResizeGuiFont(1) end, opts)
+vim.keymap.set({ 'n', 'i' }, "<C-ScrollWheelDown>", function() ResizeGuiFont(-1) end, opts)
+vim.keymap.set({ 'n', 'i' }, "<C-BS>", function() ResetGuiFont() end, opts)
