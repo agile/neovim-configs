@@ -3,4 +3,9 @@ if not status_ok then
   return
 end
 
-trailspace.setup()
+trailspace.setup({
+    -- Highlight only in normal buffers (ones with empty `buftype`)
+    -- This is useful to not show trailing ws where it usually doesn't matter
+    -- only_in_normal_buffers = true,
+    only_in_normal_buffers = false,
+})
