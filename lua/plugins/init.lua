@@ -302,7 +302,7 @@ require("packer").startup(function(use)
         run = "cd app && npm install",
         -- setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
         -- ft = { "markdown" },
-        config = require "plugins.configs.markdown-preview.lua",
+        config = require "plugins.configs.markdown-preview",
     }
 
     ---- Git
