@@ -249,6 +249,15 @@ require("packer").startup(function(use)
         "simrat39/rust-tools.nvim",
         requires = "nvim-lua/plenary.nvim"
     }
+    -- Scala
+    use {
+        "scalameta/nvim-metals",
+        requires = {
+          "nvim-lua/plenary.nvim",
+          "mfussenegger/nvim-dap",
+        },
+        config = require "plugins.configs.metals",
+    }
     -- Java LSP extensions
     use "mfussenegger/nvim-jdtls"
 

@@ -39,8 +39,11 @@ local options = {
     signcolumn = "auto",        -- when to show the sign col, yes:always, no:never, auto:when-needed, number:use-number col if present else auto
     termguicolors = true,       -- set term gui colors (most terminals support this)
     background = "dark",        -- adjust default color groups for background type: dark vs light
-    completeopt = {"menuone","noselect"}, -- insert-mode completion, menuone:popup even w/only 1 opt, noselect:don't autoselect options
-
+    completeopt = {             -- insert-mode completion
+      "menuone",                -- popup menu even w/only 1 option
+      "noselect",               -- don't autoselect options
+      "noinsert",               -- Do not insert any test for a match until a selection is made
+    },
 
     clipboard = "unnamed,unnamedplus", --allows neovim access to the system clipboard
     cursorline = true,          -- should the current line be highlighted
