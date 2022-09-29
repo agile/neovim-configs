@@ -28,8 +28,8 @@ local options = {
     softtabstop = 2,            -- number of space for tabbing while editing
     shiftwidth = 2,             -- how many characters to indent
     shiftround = true,          -- should indention be rounded to multiples of shiftwidth?
-    splitbelow = true,          -- should h-splits put new window below current?
-    splitright = true,          -- should v-splits put new window to right of current?
+    splitbelow = false,         -- should h-splits put new window below current?
+    splitright = false,         -- should v-splits put new window to right of current?
 
     scrolloff = 5,              -- minimum lines of context to keep above/below cursor while scrolling
     sidescrolloff = 5,          -- minimum columns of context to keep before/after cursor while side-scrolling
