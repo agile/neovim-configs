@@ -80,8 +80,9 @@ cmp.setup {
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-q>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm({
-            select = true
-        }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+            select = false
+        }),
         -- old config included maps for tab/s-tabing..
         -- I use tabs... some say you should stick to ins-completion but this is just here as an example
         ["<Tab>"] = function(fallback)
