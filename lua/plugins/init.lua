@@ -160,10 +160,7 @@ require("packer").startup(function(use)
     ---- Utilities
     use "lewis6991/impatient.nvim"   -- Startup performance enhancer
     use "gpanders/editorconfig.nvim" -- support for .editorconfig files https://editorconfig.org/
-    use {
-        "echasnovski/mini.nvim",      -- many little conveniences/plugins
-        config = require "plugins.configs.mini",
-    }
+
     use {
         -- Search engine
         "nvim-telescope/telescope.nvim",

@@ -37,4 +37,6 @@ else
   require "lsp"
   require "autocmds"
   require "commands"
+
+  vim.cmd "source ~/.config/nvim/mappings.vim"
 end
