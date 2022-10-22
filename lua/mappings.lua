@@ -65,6 +65,14 @@ wk.register({
 
     ["K"] = {"<cmd>lua vim.lsp.buf.hover()<CR>", "[LSP] Hover"},
 
+    ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
+    ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "[LSP] Go to definition" },
+    ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "[LSP] Go to declaration" },
+    ["gi"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "[LSP] Go to implementation" },
+    ["gk"] = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
+    ["gf"] = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "[LSP] Format code" },
+
+
     ["<leader>t"] = {
         name = "[TELESCOPE]",
         f = { "<cmd>Telescope find_files hidden=false no_ignore=true<cr>", "[TELESCOPE] Find File" },
