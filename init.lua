@@ -27,9 +27,6 @@ if old_config then
   require "user.indent-blankline"
   require "user.mini-trailspace"
   require "user.markdownpreview"
-
-  -- TODO: rewrite these in lua
-  vim.cmd "source ~/.config/nvim/mappings.vim"
 else
   require "settings"
   require "mappings"
@@ -37,6 +34,8 @@ else
   require "lsp"
   require "autocmds"
   require "commands"
-
-  vim.cmd "source ~/.config/nvim/mappings.vim"
 end
+
+-- TODO: rewrite these in lua
+vim.cmd "source ~/.config/nvim/mappings.vim"
+vim.cmd "source ~/.config/nvim/youcaintspel.vim"
