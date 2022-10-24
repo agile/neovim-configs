@@ -26,9 +26,29 @@ end
 
 local _lspconfig, lspconfig = pcall(require, "lspconfig")
 if _lspconfig then
-    -- Python
+    -- Python (pyright)
     lspconfig.pyright.setup({
         cmd = { LSP_ROOT_PATH .. "/pyright/node_modules/.bin/pyright-langserver", "--stdio" },
+    })
+
+    -- Python (pylsp)
+    lspconfig.pyright.setup({
+        cmd = { LSP_ROOT_PATH .. "/pylsp/pylsp" },
+    })
+
+    -- Terraform
+    lspconfig.terraformls.setup({
+        cmd = { LSP_ROOT_PATH .. "/terraformls/terraform-ls", "serve"},
+    })
+
+    -- Elixir
+    lspconfig.elixirls.setup({
+        cmd = { LSP_ROOT_PATH .. "/elixirls/elixir-ls/language_server.sh" },
+    })
+
+    -- Go
+    lspconfig.elixirls.setup({
+        cmd = { LSP_ROOT_PATH .. "/gopls/gopls" },
     })
 
     -- LUA
