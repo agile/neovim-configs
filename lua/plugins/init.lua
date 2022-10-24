@@ -40,6 +40,12 @@ require("packer").startup(function(use)
     use "wbthomason/packer.nvim"
 
     ---- UI Themes
+    -- See lua/theme.lua for configurations
+    -- use "agile/lushy-blues"
+    -- using a local copy while I derp it up
+    use "~/personal/lushy-blues"
+    use "rktjmp/lush.nvim"
+    use "Mofiqul/vscode.nvim"
     use "rmehri01/onenord.nvim"
     use "folke/tokyonight.nvim"
     use "navarasu/onedark.nvim"

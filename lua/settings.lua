@@ -93,9 +93,15 @@ if _notify then
 end
 
 -- UI theme
+local default_theme = "lushy-blues"
+local themename = default_theme
 -- local themename = "draculanight"
-local themename = "tokyonight"
+-- local themename = "vscode"
+-- local themename = "tokyonight"
 local _theme, _ = pcall(require, themename)
 if _theme then
     require("theme").init(themename)
+else
+    print("Failed to load theme: " .. themename .. ", using default colorscheme: " .. default_theme)
+    vim.cmd.colorscheme(default_theme)
 end

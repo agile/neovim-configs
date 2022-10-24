@@ -37,93 +37,11 @@ M.init = function(theme_name)
     M.theme_name = theme_name
     local _ok, theme = pcall(require, M.theme_name)
     if not _ok then
-      return
-  end
+        print("Theme: " .. theme_name .. " failed to load")
+        return
+    end
 
-    if M.theme_name == 'onenord' then
-        theme.setup {
-            borders = true,
-            fade_nc = false,
-            styles = {
-                comments = "italic",
-                strings = "NONE",
-                keywords = "NONE",
-                functions = "italic",
-                variables = "bold",
-                diagnostics = "underline"
-            },
-            disable = {
-                background = false,
-                cursorline = false,
-                eob_lines = true
-            },
-            colors = {},
-            custom_highlights = {
-                VertSplit = {
-                    fg = M.colors.grey14
-                },
-                BufferLineIndicatorSelected = {
-                    fg = M.colors.cyan,
-                    bg = M.colors.bg
-                },
-                BufferLineFill = {
-                    fg = M.colors.fg,
-                    bg = M.colors.grey14
-                },
-                WhichKeyFloat = {
-                    bg = M.colors.grey14
-                },
-                GitSignsAdd = {
-                    fg = M.colors.green
-                },
-                GitSignsChange = {
-                    fg = M.colors.orange
-                },
-                GitSignsDelete = {
-                    fg = M.colors.red
-                },
-
-                NormalFloat = {
-                    bg = M.colors.grey14
-                },
-                FloatBorder = {
-                    bg = M.colors.grey14,
-                    fg = M.colors.grey14
-                },
-
-                Pmenu = {
-                    bg = M.colors.grey14
-                },
-                PMenuThumb = {
-                    bg = M.colors.grey16
-                },
-
-                LspFloatWinNormal = {
-                    fg = M.colors.fg,
-                    bg = M.colors.grey14
-                },
-                LspFloatWinBorder = {
-                    fg = M.colors.grey14
-                },
-
-                IndentBlanklineChar = {
-                    fg = M.colors.grey12,
-                    style = "nocombine"
-                },
-                IndentBlanklineContextChar = {
-                    fg = M.colors.magenta,
-                    style = "nocombine"
-                },
-
-                TSVariable = {
-                    fg = M.colors.blue
-                },
-                TSVariableBuiltin = {
-                    fg = M.colors.blue
-                }
-            }
-        }
-    elseif M.theme_name == 'tokyonight' then
+    if M.theme_name == 'tokyonight' then
         -- https://github.com/folke/tokyonight.nvim#%EF%B8%8F-configuration
         theme.setup({
             style = 'night',
@@ -144,11 +62,9 @@ M.init = function(theme_name)
     elseif M.theme_name == 'onedark' then
         theme.setup { style = 'darker' }
         theme.load()
-    elseif M.theme_name == 'moonfly' then
-        vim.cmd [[colorscheme moonfly]]
     elseif M.theme_name == 'material' then
         vim.g.material_style = "oceanic"
-        vim.cmd 'colorscheme material'
+        vim.cmd.colorscheme("material")
     elseif M.theme_name == 'onedarkpro' then
         vim.o.background = "dark"
         theme.load()
@@ -157,16 +73,42 @@ M.init = function(theme_name)
         vim.g.tokyodark_enable_italic_comment = true
         vim.g.tokyodark_enable_italic = true
         vim.g.tokyodark_color_gamma = "0.0"
-        vim.cmd 'colorscheme tokyodark'
+        vim.cmd.colorscheme("tokyodark")
     elseif M.theme_name == 'catppuccin' then
         vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
-        vim.cmd [[colorscheme catppuccin]]
+        vim.cmd.colorscheme("catppuccin")
     elseif M.theme_name == 'dracula' then
         theme.setup {}
         theme.load()
-     elseif M.theme_name == 'draculanight' then
+    elseif M.theme_name == 'draculanight' then
         theme.setup {}
         theme.load()
+    elseif M.theme_name == 'vscode' then
+        -- see https://github.com/Mofiqul/vscode.nvim
+        theme.setup {
+            -- Enable transparent background
+            -- transparent = true,
+
+            -- Enable italic comment
+            -- italic_comments = true,
+
+            -- Disable nvim-tree background color
+            -- disable_nvimtree_bg = true,
+
+            -- Override colors (see ./lua/vscode/colors.lua)
+            -- color_overrides = {
+            --     vscLineNumber = '#FFFFFF',
+            -- },
+
+            -- Override highlight groups (see ./lua/vscode/theme.lua)
+            -- group_overrides = {
+            --     -- this supports the same val table as vim.api.nvim_set_hl
+            --     -- use colors from this colorscheme by requiring vscode.colors!
+            --     Cursor = { fg=colors.purple, bg=colors.green, bold=true },
+            -- },
+        }
+    else
+        vim.cmd.colorscheme(M.theme_name)
     end
 end
 
