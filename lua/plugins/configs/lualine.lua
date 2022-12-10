@@ -94,6 +94,23 @@ local branch = {
   icon = "",
 }
 
+
+local _navic, navic = pcall(require, "nvim-navic")
+local _jsonpath, jsonpath = pcall(require, "jsonpath")
+local _treesitter, treesitter = pcall(require, "nvim-treesitter")
+local location_indicator = function()
+    if _jsonpath and jsonpath.get() ~= "" then
+        return jsonpath.get()
+    -- have yet to get this to actually work, not sure why??
+    elseif _navic and navic.is_available and navic.get_location() ~= "" then
+        return navic.get_location()
+    elseif _treesitter and treesitter.statusline(255) ~= "" then
+        return treesitter.statusline(90)
+    else
+        return "aerial"
+    end
+end
+
 local spaces = function()
   return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
@@ -102,8 +119,8 @@ lualine.setup({
   options = {
     icons_enabled = true,
     theme = 'auto',
-    component_separators = { left = "", right = "" }, -- default: { left = '', right = ''},
-    section_separators = { left = "", right = "" },  -- default: { left = '', right = ''},
+    -- component_separators = { left = "", right = "" }, -- default: { left = '', right = ''},
+    -- section_separators = { left = "", right = "" },  -- default: { left = '', right = ''},
     disabled_filetypes = {
       statusline = { "dashboard", "NvimTree", "Outline" }, -- default: {},
       winbar = {},
@@ -144,7 +161,12 @@ lualine.setup({
   },
   winbar = {
 		lualine_a = { filetype, filename },
-		lualine_b = { "location", "diagnostics" },
+		lualine_b = { "location", location_indicator, "diagnostics" },
+		-- lualine_b = { "location", { navic.get_location, cond = navic.is_available }, "diagnostics" },
+        -- lualine_b = {
+        --     navic.get_location
+        -- },
+        -- lualine_c = { "aerial" },
   },
   extensions = {},
 })

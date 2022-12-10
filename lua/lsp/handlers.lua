@@ -9,7 +9,7 @@ local signature_cfg = {
 	-- mode, 10 by default
 
 	floating_window = true, -- show hint in a floating window, set to false for virtual text only mode
-	hint_enable = false, -- virtual hint enable
+	hint_enable = true, -- virtual hint enable
 	hint_prefix = "🐼 ", -- Panda for parameter
 	hint_scheme = "String",
 	use_lspsaga = false, -- set to true if you want to use lspsaga popup
@@ -25,23 +25,25 @@ local signature_cfg = {
 }
 
 local function set_document_higlighting(client)
-  local dfp = client.server_capabilities.documentFormattingProvider
-  if dfp == true or (type(dfp) == "table" and next(dfp) ~= nil) then
+  if client.server_capabilities.documentFormattingProvider then
     require("illuminate").on_attach(client)
   end
 end
 
 local function set_signature_helper(client, bufnr)
-  local shp = client.server_capabilities.signatureHelpProvider
-  if shp == true or (type(shp) == "table" and next(shp) ~= nil) then
+  if client.server_capabilities.signatureHelpProvider then
     require("lsp_signature").on_attach(signature_cfg, bufnr)
   end
 end
 
 local function set_hover_border(client)
-  local hp = client.server_capabilities.hoverProvider
-  if hp == true or (type(hp) == "table" and next(hp) ~= nil) then
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
+  if client.server_capabilities.hoverProvider then
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+        vim.lsp.handlers.hover, {
+            -- border = border,
+            border = "single",
+        }
+    )
   end
 end
 
@@ -52,11 +54,30 @@ local function get_basic_capabilities()
   return capabilities
 end
 
+local function attach_navic(client, bufnr)
+    local have_navic, navic = pcall(require, 'navim-navic')
+    if not have_navic then
+        return
+    end
+    if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+    end
+end
+
+local function attach_aerial(client, bufnr)
+    local have_aerial, aerial = pcall(require, 'aerial')
+    if not have_aerial then
+        return
+    end
+    aerial.on_attach(client, bufnr)
+end
+
 M.on_attach = function(client, bufnr)
-    require("aerial").on_attach(client, bufnr)
     set_document_higlighting(client)
     set_signature_helper(client, bufnr)
     set_hover_border(client)
+    attach_aerial(client, bufnr)
+    attach_navic(client, bufnr)
   end
 
 M.capabilities = require("cmp_nvim_lsp").default_capabilities(get_basic_capabilities())

@@ -63,12 +63,16 @@ wk.register({
     ["_"] = { "zM", "[FOLDS] Close all folds" },
 
 
-    ["K"] = {"<cmd>lua vim.lsp.buf.hover()<CR>", "[LSP] Hover"},
+    ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "[LSP] Hover"},
+    -- ["K"] = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
 
-    ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
     ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "[LSP] Go to definition" },
     ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "[LSP] Go to declaration" },
     ["gi"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "[LSP] Go to implementation" },
+    ["gl"] = { "<cmd>Lspsaga codelens<cr>", "[LSP] Code Lens" },
+    ["go"] = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "[LSP] Def of type symbol" },
+    ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
+
     ["gk"] = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
     ["gf"] = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "[LSP] Format code" },
 
@@ -113,6 +117,8 @@ wk.register({
         o = { "<cmd>lua require'dapui'.open()<cr>", "[DAPUI] Open debugging UI" },
         c = { "<cmd>lua require'dapui'.close()<cr>", "[DAPUI] Close debugging UI" },
     },
+    ["<F2>"]  = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
+    ["<F4>"]  = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code Action" },
     ["<F10>"] = { "<cmd>lua require'dap'.step_over()<cr>", "[DAP] Step over" },
     ["<F11>"] = { "<cmd>lua require'dap'.step_into()<cr>", "[DAP] Step into" },
     ["<F12>"] = { "<cmd>lua require'dap'.step_out()<cr>", "[DAP] Step out" },
@@ -188,6 +194,17 @@ wk.register({
     ["<a-j>"] = { ":m '>+1<cr>gv=gv", "[MOVE] Move block down" },
     ["<a-k>"] = { ":m '<-2<cr>gv=gv", "[MOVE] Move block up" },
 }, v_opts)
+
+local x_opts = {
+    mode = "x",
+    nowait = true,
+    prefix = "",
+    silent = true,
+    noremap = true,
+}
+wk.register({
+    ["<F4>"]  = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code Action" },
+}, x_opts)
 
 wk.setup {}
 

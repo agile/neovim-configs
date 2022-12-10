@@ -26,29 +26,51 @@ end
 
 local _lspconfig, lspconfig = pcall(require, "lspconfig")
 if _lspconfig then
+    local mason_bin_path = LSP_ROOT_PATH .. "/../bin"
+
     -- Python (pyright)
     lspconfig.pyright.setup({
-        cmd = { LSP_ROOT_PATH .. "/pyright/node_modules/.bin/pyright-langserver", "--stdio" },
+        --  cmd = { LSP_ROOT_PATH .. "/pyright/node_modules/.bin/pyright-langserver", "--stdio" },
+        cmd = { mason_bin_path .. "/pyright-langserver", "--stdio" },
     })
 
     -- Python (pylsp)
-    lspconfig.pyright.setup({
-        cmd = { LSP_ROOT_PATH .. "/pylsp/pylsp" },
-    })
+    -- lspconfig.pylsp.setup({
+    --     -- cmd = { LSP_ROOT_PATH .. "/pylsp/pylsp" },
+    --     cmd = { mason_bin_path .. "/pylsp" },
+    --     settings = {
+    --         pylsp = {
+    --             plugins = {
+    --                 pylint = {
+    --                     enabled = true,
+    --                     -- args = [],
+    --                     -- executable = "",
+    --                 },
+    --                 rope_autoimport = {
+    --                     enabled = true,
+    --                     memory = true,
+    --                 },
+    --             },
+    --         },
+    --     },
+    -- })
 
     -- Terraform
     lspconfig.terraformls.setup({
-        cmd = { LSP_ROOT_PATH .. "/terraformls/terraform-ls", "serve"},
+        -- cmd = { LSP_ROOT_PATH .. "/terraformls/terraform-ls", "serve"},
+        cmd = { mason_bin_path .. "/terraform-ls", "serve"},
     })
 
     -- Elixir
     lspconfig.elixirls.setup({
-        cmd = { LSP_ROOT_PATH .. "/elixirls/elixir-ls/language_server.sh" },
+        -- cmd = { LSP_ROOT_PATH .. "/elixirls/elixir-ls/language_server.sh" },
+        cmd = { mason_bin_path .. "/elixir-ls" },
     })
 
     -- Go
     lspconfig.elixirls.setup({
-        cmd = { LSP_ROOT_PATH .. "/gopls/gopls" },
+        -- cmd = { LSP_ROOT_PATH .. "/gopls/gopls" },
+        cmd = { mason_bin_path .. "/gopls" },
     })
 
     -- LUA
@@ -83,22 +105,25 @@ if _lspconfig then
 
     -- Bash
     lspconfig.bashls.setup({
-        cmd = { LSP_ROOT_PATH .. "/bash-language-server/node_modules/.bin/bash-language-server" },
+        -- cmd = { LSP_ROOT_PATH .. "/bash-language-server/node_modules/.bin/bash-language-server" },
+        cmd = { mason_bin_path .. "/bash-language-server" },
     })
 
     -- Dockerfile
     lspconfig.dockerls.setup({
-        cmd = { LSP_ROOT_PATH .. "/dockerfile-language-server/node_modules/.bin/docker-langserver" },
+        -- cmd = { LSP_ROOT_PATH .. "/dockerfile-language-server/node_modules/.bin/docker-langserver" },
+        cmd = { mason_bin_path .. "/dockerfile-langserver" },
     })
-    -- HTML
-    local html_root_path = LSP_ROOT_PATH .. "/html-lsp/node_modules/.bin"
-    lspconfig.html.setup({
-        cmd = { html_root_path .. "/vscode-html-language-server", "--stdio" },
-    })
-
     -- JSON
     lspconfig.jsonls.setup({
-        cmd = { html_root_path .. "/vscode-json-language-server", "--stdio" },
+        cmd = { mason_bin_path .. "/vscode-json-language-server", "--stdio" },
+    })
+
+    --[[ -- HTML
+    local html_root_path = LSP_ROOT_PATH .. "/html-lsp/node_modules/.bin"
+    lspconfig.html.setup({
+        -- cmd = { html_root_path .. "/vscode-html-language-server", "--stdio" },
+        cmd = { mason_bin_path .. "/vscode-html-language-server", "--stdio" },
     })
 
     -- CSS
@@ -119,5 +144,5 @@ if _lspconfig then
     local cssmodules_ls_root_path = LSP_ROOT_PATH .. "/cssmodules-language-server/node_modules/.bin"
     lspconfig.cssmodules_ls.setup({
         cmd = { cssmodules_ls_root_path .. "/cssmodules-language-server" },
-    })
+    }) ]]
 end

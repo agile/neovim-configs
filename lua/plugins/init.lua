@@ -46,14 +46,7 @@ require("packer").startup(function(use)
     use "~/personal/lushy-blues"
     use "rktjmp/lush.nvim"
     use "Mofiqul/vscode.nvim"
-    use "rmehri01/onenord.nvim"
     use "folke/tokyonight.nvim"
-    use "navarasu/onedark.nvim"
-    use "olimorris/onedarkpro.nvim"
-    use "tiagovla/tokyodark.nvim"
-    use "bluz71/vim-moonfly-colors"
-    use "Mofiqul/dracula.nvim"
-    use "magidc/draculanight"
     use {
         "catppuccin/nvim",
         as = "catppuccin"
@@ -84,6 +77,11 @@ require("packer").startup(function(use)
     use "folke/which-key.nvim"
 
     use {
+        "nvim-zh/colorful-winsep.nvim",
+        config = require "plugins.configs.colorful-winsep"
+    }
+
+    use {
         -- Smoother scroll
         "karb94/neoscroll.nvim",
         config = require "plugins.configs.neoscroll"
@@ -102,16 +100,23 @@ require("packer").startup(function(use)
     }
 
     use {
+        "SmiteshP/nvim-navic",
+        config = require "plugins.configs.navic",
+        requires = {
+            "neovim/nvim-lspconfig",
+            "nvim-treesitter/nvim-treesitter",
+        },
+    }
+
+    use {
         -- Status bar
         "nvim-lualine/lualine.nvim",
         requires = {
             "arkav/lualine-lsp-progress",
-            -- "SmiteshP/nvim-gps",
-            -- FIXME: revisit navic after getting through LSP config
-            -- { -- statusline/winbar component to display code context
-            --   "SmiteshP/nvim-navic",
-            --   requires = "neovim-nvim-lspconfig",
-            -- },
+            { -- statusline/winbar component to display code context
+              "SmiteshP/nvim-navic",
+              requires = "neovim-nvim-lspconfig",
+            },
             -- "rmagatti/auto-session",
             { "kyazdani42/nvim-web-devicons", opt = true },
         },
@@ -158,14 +163,17 @@ require("packer").startup(function(use)
             "nvim-treesitter/nvim-treesitter-textobjects",  -- identify comments
             "nvim-treesitter/playground",                   -- View treesitter information directly in Neovim
             "JoosepAlviste/nvim-ts-context-commentstring",  -- commentstring
+            "phelipetls/jsonpath.nvim",                     -- Show jq like path in json under cursor
         },
         run = ":TSUpdate",
         config = require "plugins.configs.treesitter"
     }
 
+
     ---- Utilities
     use "lewis6991/impatient.nvim"   -- Startup performance enhancer
     use "gpanders/editorconfig.nvim" -- support for .editorconfig files https://editorconfig.org/
+    use { "godlygeek/tabular", cmd = { "Tabularize" } } -- align the things!
 
     use {
         -- Search engine
@@ -217,11 +225,11 @@ require("packer").startup(function(use)
         -- Automatically highlighting other uses of the current word under the cursor
         "RRethy/vim-illuminate"
     }
-    use {
-        --  Aims to provide a simple, unified, single tabpage interface that lets you easily review all changed files for any git rev
-        "sindrets/diffview.nvim",
-        requires = "nvim-lua/plenary.nvim"
-    }
+    -- use {
+    --     --  Aims to provide a simple, unified, single tabpage interface that lets you easily review all changed files for any git rev
+    --     "sindrets/diffview.nvim",
+    --     requires = "nvim-lua/plenary.nvim"
+    -- }
 
     ---- Comments
     use {
@@ -264,25 +272,29 @@ require("packer").startup(function(use)
     -- Java LSP extensions
     use "mfussenegger/nvim-jdtls"
 
+    -- Lookml Syntax
+    use "thalesmello/lkml.vim"
+
     -- Debug
     use "mfussenegger/nvim-dap"
+    use {
+        "jbyuki/one-small-step-for-vimkind",
+        config = require "plugins.configs.one-small-step-for-vimkind"
+    }
     use {
         "rcarriga/nvim-dap-ui",
         config = require "plugins.configs.dapui"
     }
-
     use {
         "nvim-telescope/telescope-dap.nvim",
         requires = { "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap" },
         config = require "plugins.configs.telescopedap"
     }
+
     ---- Snippets
-    use {
-        "L3MON4D3/LuaSnip",
-    }
-    use {
-        "rafamadriz/friendly-snippets",
-    }
+    use "L3MON4D3/LuaSnip"
+    use "rafamadriz/friendly-snippets"
+
     ---- Completion
     use {
         "hrsh7th/nvim-cmp",

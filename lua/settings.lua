@@ -44,6 +44,12 @@ local options = {
       "noselect",               -- don't autoselect options
       "noinsert",               -- Do not insert any test for a match until a selection is made
     },
+    diffopt = {
+        "internal",             -- use internal xdiff lib
+        "algorithm:histogram",  -- myers (default), minimal, patience, histogram
+        "indent-heuristic",     -- Use the indent heuristic le
+        "linematch:60",         -- perform secondary diff on hunks under 60 lines
+    },
 
     clipboard = "unnamed,unnamedplus", --allows neovim access to the system clipboard
     cursorline = true,          -- should the current line be highlighted
