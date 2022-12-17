@@ -244,17 +244,56 @@ require("packer").startup(function(use)
 
     ---- LSP/DAP
 
-    -- An LSP installer/managment plugin
     use {
-        "williamboman/mason.nvim",
-        config = require "plugins.configs.mason"
+        "VonHeikemen/lsp-zero.nvim",
+        requires = {
+          -- LSP Support
+          {"neovim/nvim-lspconfig"},
+          {"williamboman/mason.nvim"},
+          {"williamboman/mason-lspconfig.nvim"},
+
+          -- Autocompletion
+          {"hrsh7th/nvim-cmp"},
+          -- {"hrsh7th/cmp-buffer"},
+          -- {"hrsh7th/cmp-path"},
+          -- {"saadparwaiz1/cmp_luasnip"},
+          -- {"hrsh7th/cmp-nvim-lsp"},
+          -- {"hrsh7th/cmp-nvim-lua"},
+
+          { -- nvim-cmp plugins
+            "onsails/lspkind.nvim",                 -- VSCode like item type icons
+            "hrsh7th/cmp-buffer",                   -- Buffer completions
+            "hrsh7th/cmp-calc",                     -- Math completions
+            "hrsh7th/cmp-cmdline",                  -- Command line completions
+            "hrsh7th/cmp-nvim-lsp",                 -- LSP completions
+            "hrsh7th/cmp-nvim-lsp-document-symbol", -- LSP textDocument/documentSymbol completions
+            "hrsh7th/cmp-nvim-lsp-signature-help",  -- LSP Signature completions
+            "hrsh7th/cmp-nvim-lua",                 -- Lua completions
+            "hrsh7th/cmp-path",                     -- Path completions
+            "lukas-reineke/cmp-under-comparator",   -- Better sort completion items starting with underscore (Python)
+            "lttr/cmp-jira",                        -- JIRA completions
+            "KadoBOT/cmp-plugins",                  -- Neovim plugin completions
+            "saadparwaiz1/cmp_luasnip",
+          },
+
+          -- Snippets
+          {'L3MON4D3/LuaSnip'},
+          {'rafamadriz/friendly-snippets'},
+        },
+        config = require "plugins.configs.lsp-zero"
     }
-    -- Core maintained LSP helpers
-    use {
-        "neovim/nvim-lspconfig",
-        -- deferred to lsp.lua
-        -- config = require "plugins.configs.lspconfig"
-    }
+--
+--     -- An LSP installer/managment plugin
+--     use {
+--         "williamboman/mason.nvim",
+--         config = require "plugins.configs.mason"
+--     }
+--     -- Core maintained LSP helpers
+--     use {
+--         "neovim/nvim-lspconfig",
+--         -- deferred to lsp.lua
+--         -- config = require "plugins.configs.lspconfig"
+--     }
     -- Rust LSP extensions
     use {
         "simrat39/rust-tools.nvim",
@@ -264,8 +303,8 @@ require("packer").startup(function(use)
     use {
         "scalameta/nvim-metals",
         requires = {
-          "nvim-lua/plenary.nvim",
-          "mfussenegger/nvim-dap",
+           "nvim-lua/plenary.nvim",
+           "mfussenegger/nvim-dap",
         },
         config = require "plugins.configs.metals",
     }
@@ -292,33 +331,33 @@ require("packer").startup(function(use)
     }
 
     ---- Snippets
-    use "L3MON4D3/LuaSnip"
-    use "rafamadriz/friendly-snippets"
+    -- use "L3MON4D3/LuaSnip"
+    -- use "rafamadriz/friendly-snippets"
 
     ---- Completion
-    use {
-        "hrsh7th/nvim-cmp",
-        requires = {
-            "onsails/lspkind.nvim",                 -- VSCode like item type icons
-            "hrsh7th/cmp-buffer",                   -- Buffer completions
-            "hrsh7th/cmp-calc",                     -- Math completions
-            "hrsh7th/cmp-cmdline",                  -- Command line completions
-            "hrsh7th/cmp-nvim-lsp",                 -- LSP completions
-            "hrsh7th/cmp-nvim-lsp-document-symbol", -- LSP textDocument/documentSymbol completions
-            "hrsh7th/cmp-nvim-lsp-signature-help",  -- LSP Signature completions
-            "hrsh7th/cmp-nvim-lua",                 -- Lua completions
-            "hrsh7th/cmp-path",                     -- Path completions
-            "lukas-reineke/cmp-under-comparator",   -- Better sort completion items starting with underscore (Python)
-            "lttr/cmp-jira",                        -- JIRA completions
-            "KadoBOT/cmp-plugins",                  -- Neovim plugin completions
+    -- use {
+    --     "hrsh7th/nvim-cmp",
+    --     requires = {
+    --         "onsails/lspkind.nvim",                 -- VSCode like item type icons
+    --         "hrsh7th/cmp-buffer",                   -- Buffer completions
+    --         "hrsh7th/cmp-calc",                     -- Math completions
+    --         "hrsh7th/cmp-cmdline",                  -- Command line completions
+    --         "hrsh7th/cmp-nvim-lsp",                 -- LSP completions
+    --         "hrsh7th/cmp-nvim-lsp-document-symbol", -- LSP textDocument/documentSymbol completions
+    --         "hrsh7th/cmp-nvim-lsp-signature-help",  -- LSP Signature completions
+    --         "hrsh7th/cmp-nvim-lua",                 -- Lua completions
+    --         "hrsh7th/cmp-path",                     -- Path completions
+    --         "lukas-reineke/cmp-under-comparator",   -- Better sort completion items starting with underscore (Python)
+    --         "lttr/cmp-jira",                        -- JIRA completions
+    --         "KadoBOT/cmp-plugins",                  -- Neovim plugin completions
 
-            -- LSP Signature completions (need to compare with hrsh7th's)
-            -- use "ray-x/lsp_signature.nvim"
-            "L3MON4D3/LuaSnip",
-            "saadparwaiz1/cmp_luasnip",
-        },
-        config = require "plugins.configs.cmp"
-    }
+    --         -- LSP Signature completions (need to compare with hrsh7th's)
+    --         -- use "ray-x/lsp_signature.nvim"
+    --         "L3MON4D3/LuaSnip",
+    --         "saadparwaiz1/cmp_luasnip",
+    --     },
+    --     config = require "plugins.configs.cmp"
+    -- }
     -- use {"ellisonleao/glow.nvim"} -- markdown preview
     use {
         "iamcco/markdown-preview.nvim",
