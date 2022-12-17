@@ -44,3 +44,4 @@ luac.out
 
 # packer compiled lua
 plugin/*lua
+.luarc.json
