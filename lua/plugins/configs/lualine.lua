@@ -99,12 +99,12 @@ local _navic, navic = pcall(require, "nvim-navic")
 local _jsonpath, jsonpath = pcall(require, "jsonpath")
 local _treesitter, treesitter = pcall(require, "nvim-treesitter")
 local location_indicator = function()
-    if _jsonpath and jsonpath.get() ~= "" then
+    if _jsonpath and jsonpath.get() ~= "" and jsonpath.get() ~= "." then
         return jsonpath.get()
     -- have yet to get this to actually work, not sure why??
-    elseif _navic and navic.is_available and navic.get_location() ~= "" then
+    elseif _navic and navic.is_available and navic.get_location() ~= "" and navic.get_location() ~= "." then
         return navic.get_location()
-    elseif _treesitter and treesitter.statusline(255) ~= "" then
+    elseif _treesitter and treesitter.statusline(255) ~= "" and treesitter.statusline ~= "." then
         return treesitter.statusline(90)
     else
         return "aerial"
