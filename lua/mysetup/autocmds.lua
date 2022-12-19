@@ -1,26 +1,39 @@
+local autocmd = vim.api.nvim_create_autocmd
+local autogrp = vim.api.nvim_create_augroup
+
 -- Highlight on yank
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
+local highlight_group = autogrp("YankHighlight", { clear = true })
+autocmd("TextYankPost", {
+    group = highlight_group,
     pattern = "*",
     callback = function()
-        vim.highlight.on_yank()
+        vim.highlight.on_yank({
+          higroup = "IncSearch",
+          timeout = 40,
+        })
     end,
-    group = highlight_group,
 })
 
 -- Disable comment new line
-vim.api.nvim_create_autocmd("BufWinEnter", {
+autocmd("BufWinEnter", {
     pattern = "*",
     callback = function()
         vim.opt_local.formatoptions:remove { "c", "r", "o" }
     end,
 })
 
-vim.api.nvim_create_autocmd("BufRead,BufNewFile", {
+autocmd("BufRead,BufNewFile", {
     pattern = "tsconfig.json",
     callback = function()
         vim.opt.filetype = "jsonc"
     end,
+})
+
+-- Remove trailing spaces
+autocmd({"BufWritePre"}, {
+  group = MySetupGroup, 
+  pattern = "*",
+  command = [[%s/\s+$//e]],
 })
 
 -- " open diff of index in vsplit if editing git commit msg
@@ -32,10 +45,10 @@ vim.api.nvim_create_autocmd("BufRead,BufNewFile", {
 --   \ exe "normal :wincmd w" |
 --   \ exe "normal ggi"
 
--- vim.api.nvim_create_autocmd("BufReadPost COMMIT_EDITMSG"
+-- autocmd("BufReadPost COMMIT_EDITMSG"
 
-local commits = vim.api.nvim_create_augroup("Commits", { clear = true })
-vim.api.nvim_create_autocmd("BufReadPost", {
+local commits = autogrp("Commits", { clear = true })
+autocmd("BufReadPost", {
   group=commits,
   pattern = "*COMMIT_EDITMSG",
   callback = function()

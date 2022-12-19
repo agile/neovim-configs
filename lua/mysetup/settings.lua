@@ -1,4 +1,3 @@
-local utils = require "utils"
 
 -- :help options
 local options = {
@@ -37,6 +36,7 @@ local options = {
     relativenumber = true,      -- should the number column show relative numbered lines?
     numberwidth = 2,            -- min cols to use for line number. (default 4)
     signcolumn = "auto",        -- when to show the sign col, yes:always, no:never, auto:when-needed, number:use-number col if present else auto
+    -- colorcolumn = "80",      -- highlight this column?
     termguicolors = true,       -- set term gui colors (most terminals support this)
     background = "dark",        -- adjust default color groups for background type: dark vs light
     completeopt = {             -- insert-mode completion
@@ -57,7 +57,7 @@ local options = {
     cmdheight = 2,              -- number of screen lines to use for the command-line.
     pumheight = 10,             -- max number of lines to show in popup menu
     laststatus = 3,             -- should last window have status line? 0:never, 1:only w/2+ wins, 2:always, 3:always, ONLY last window
-    updatetime = 250,           -- milliseconds idle before writing swapfile, also used for CursorHold autocommand event(completions) (default 4000)
+    updatetime = 50,            -- milliseconds idle before writing swapfile, also used for CursorHold autocommand event(completions) (default 4000)
     timeoutlen = 1000,          -- Time in milliseconds to wait for a mapped sequence to complete.
 
     foldenable = false,          -- should folds be enabled?
@@ -73,6 +73,10 @@ for key, value in pairs(options) do
     vim.opt[key] = value
 end
 
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
+
 if vim.g.neovide then
   vim.g.neovide_cursor_trail_length = 0         -- disable ghosting effect on cursor
   vim.g.neovide_cursor_animation_length = 0     -- disable cursor animations
@@ -84,13 +88,16 @@ vim.g.ruby_host_prog = "~/.rbenv/versions/3.1.2/bin/neovim-ruby-host"
 vim.opt.shortmess:append "c"    -- don't show ins-completion-menu msgs
 vim.opt.shortmess:remove "F"    -- allow file info to be shown when editing a file (https://github.com/scalameta/nvim-metals#user-content-fn-shortmess-93d16b9f1b9fd41fbf9d9580a948d581)
 
+vim.opt.isfname:append("@-@")   -- allow filenames to also include the @ char
+
 vim.cmd [[set fcs=eob:\ ]]                      -- attempt to disable ~ displayed for empty lines at end of buffer?
 vim.cmd [[filetype plugin indent on]]           -- turn on filetype, plugin, and indent
 vim.cmd "set whichwrap+=<,>,[,],h,l"            -- which keys can move cursor to next/prev line when wrapping (default b, s)
 vim.cmd [[set iskeyword+=-]]                    -- treat hyphenated words as a complete word vs individual words between hyphens
 vim.cmd [[set formatoptions-=cro]]              -- (remove c (auto-wrap), r (auto insert comment leader after hittin return, o (auto insert comment leader after hitting 'o')
 
-utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 4, java = 4, json = 4 }
+-- local utils = require "utils"
+-- utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 4, java = 4, json = 4 }
 
 -- nvim-notify as default vim notification method
 local _notify, notify = pcall(require, "notify")
@@ -99,14 +106,20 @@ if _notify then
 end
 
 -- UI theme
-local default_theme = "lushy-blues"
-local themename = default_theme
+-- local default_theme = "lushy-blues"
+local default_theme = "default"
+local themename = "rose-pine"
 -- local themename = "draculanight"
 -- local themename = "vscode"
 -- local themename = "tokyonight"
 local _theme, _ = pcall(require, themename)
 if _theme then
-    require("theme").init(themename)
+    local _thememod, thememod = pcall(require, "theme")
+    if _thememod then
+      thememod.init(themename)
+    else
+      vim.cmd.colorscheme(themename)
+    end
 else
     print("Failed to load theme: " .. themename .. ", using default colorscheme: " .. default_theme)
     vim.cmd.colorscheme(default_theme)
