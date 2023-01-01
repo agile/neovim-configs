@@ -35,9 +35,10 @@ packer.startup(function(use)
   use "rktjmp/lush.nvim"
   use "Mofiqul/vscode.nvim"
   use "folke/tokyonight.nvim"
+  use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use {
     "catppuccin/nvim",
-    as = "catppuccin"
+    as = "catppuccin",
   }
   use {
     "rose-pine/neovim",
@@ -93,4 +94,56 @@ packer.startup(function(use)
       {'rafamadriz/friendly-snippets'},
     },
   }
+
+  -- Status line
+  use {
+    "nvim-lualine/lualine.nvim",
+    requires = {
+      "arkav/lualine-lsp-progress",
+      { -- statusline/winbar component to display code context
+        "SmiteshP/nvim-navic",
+      },
+      -- "rmagatti/auto-session",
+      { "kyazdani42/nvim-web-devicons" },
+    },
+  }
+  -- use {
+  --   -- buffer/tab decorations/styles
+  --   "akinsho/bufferline.nvim",
+  --   requires = {
+  --     "kyazdani42/nvim-web-devicons",
+  --     -- delete buffers/close files
+  --     -- maybe check out one of the derivatives https://github.com/moll/vim-bbye/network
+  --     -- or https://github.com/famiu/bufdelete.nvim
+  --     -- or https://github.com/kazhala/close-buffers.nvim
+  --     -- or https://github.com/marklcrns/vim-smartq
+  --     "moll/vim-bbye",
+  --   },
+  -- }
+  use {
+    -- Add git related info in the signs columns and popups
+    "lewis6991/gitsigns.nvim",
+    requires = { "nvim-lua/plenary.nvim" },
+  }
+  -- Rust LSP extensions
+  use {
+    "simrat39/rust-tools.nvim",
+    requires = "nvim-lua/plenary.nvim"
+  }
+  -- Scala
+  use {
+    "scalameta/nvim-metals",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "mfussenegger/nvim-dap",
+    },
+  }
+  -- Lookml Syntax
+  use "thalesmello/lkml.vim"
+
+  -- Utilities
+  use "gpanders/editorconfig.nvim" -- support for .editorconfig files https://editorconfig.org/
+  use { "godlygeek/tabular", cmd = { "Tabularize" } } -- align the things!
+  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+
 end)

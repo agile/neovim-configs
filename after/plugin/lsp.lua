@@ -1,4 +1,8 @@
-local lsp = require("lsp-zero")
+local _lsp, lsp = pcall(require, "lsp-zero")
+if not _lsp then
+    return
+end
+local util = require "lspconfig.util"
 
 lsp.preset("recommended")
 
@@ -54,13 +58,21 @@ lsp.nvim_workspace({
 --         info = "I"
 --     }
 -- })
+lsp.configure("terraform-ls", {
+    root_dir = util.root_pattern(".terraform", ".git", ".terraform-version"),
+    file_types = {"terraform", "hcl"},
+})
 
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
 
+  if client.server_capabilities.documentSymbolProvider then
+    require('nvim-navic').attach(client, bufnr)
+  end
+
   if client.name == "eslint" then
-      vim.cmd.LspStop("eslint")
-      return
+    vim.cmd.LspStop("eslint")
+    return
   end
 
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -78,6 +90,6 @@ end)
 lsp.setup()
 
 vim.diagnostic.config({
-    virtual_text = true,
+  virtual_text = true,
 })
 
