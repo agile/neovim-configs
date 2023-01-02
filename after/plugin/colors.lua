@@ -1,7 +1,7 @@
 -- UI theme
 -- local default_theme = "lushy-blues"
 local default_theme = "tokyonight"
-local themename = "lushy-blues"
+local themename = os.getenv("THEME") or "lushy-blues"
 -- local themename = "draculanight"
 -- local themename = "vscode"
 -- local themename = "tokyonight"
