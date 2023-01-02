@@ -54,6 +54,7 @@ packer.startup(function(use)
       "nvim-treesitter/playground",                   -- View treesitter information directly in Neovim
       "JoosepAlviste/nvim-ts-context-commentstring",  -- commentstring
       "phelipetls/jsonpath.nvim",                     -- Show jq like path in json under cursor
+      -- "the-mikedavis/tree-sitter-diff",            -- grammar for diff output
     },
     run = ":TSUpdate",
   }

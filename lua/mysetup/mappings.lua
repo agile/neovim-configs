@@ -34,6 +34,13 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, {desc = "format code via ls
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", {desc = "next error in quickfix"})
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", {desc = "prev error in quickfix"})
+vim.keymap.set("n", "<leader>H",
+    function()
+        local result = vim.treesitter.get_captures_at_cursor(0)
+        print(vim.inspect(result))
+    end
+    -- ":TSHighlightCapturesUnderCursor<CR>"
+, {desc = "Show treesitter capture group for text object under cursor"})
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", {desc = "next error in window"})
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", {desc = "prev error in window"})
 

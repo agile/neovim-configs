@@ -8,7 +8,7 @@ treesitter.setup {
   -- ensure_installed = { "help", "javascript", "typescript", "c", "lua", "rust" },
   ensure_installed = "all",
   -- list of parsers to ignore installing when ensure is configured as "all"
-  -- ignore_install = {}, 
+  -- ignore_install = {},
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -38,3 +38,6 @@ treesitter.setup {
     },
   },
 }
+
+vim.api.nvim_set_hl(0, "@text.diff.add", { link = "DiffAdd" })
+vim.api.nvim_set_hl(0, "@text.diff.delete", { link = "DiffDelete" })
