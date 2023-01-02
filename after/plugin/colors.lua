@@ -37,3 +37,11 @@ end
 -- override window bg settings to force them to be transparent
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
+local _colorizer, colorizer = pcall(require, "colorizer")
+if _colorizer then
+  colorizer.setup({
+    filetypes = { "*" }
+  })
+  -- #4444ff
+end

@@ -45,6 +45,8 @@ packer.startup(function(use)
     as = "rose-pine",
   }
 
+  use "NvChad/nvim-colorizer.lua"
+
   ---- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
