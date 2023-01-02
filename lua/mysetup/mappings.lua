@@ -1,8 +1,10 @@
 -- tried space as leader key, stilll prefer comma
 -- vim.g.mapleader = ','
 -- vim.g.maplocalleader = ','
+-- ok, giving it another go..
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 --
 -- Mostly taken from Primeagen's mappings
@@ -38,9 +40,24 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", {desc = "prev error in wind
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {desc = "replace word under cursor in whole file"})
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }, {desc = "make current file executable"})
 
-vim.keymap.set("n", ";;", "<cmd>noh<cr>", "Clean search highlights")
+-- vim.keymap.set("n", "<Esc>", "<cmd>noh<cr>", {desc = "Clear search highlights"})
+vim.keymap.set("n", ";;", "<cmd>noh<cr>", {desc = "Clear search highlights"})
 
+if vim.g.is_mac then
+  -- copy/paste accommodations for stupid mac..
+  vim.g.neovide_input_use_logo = true
+  --  copy
+  vim.keymap.set("v", "<D-c>", [["+y]], {desc = "copy to clipboard"})
 
+  --  paste
+  vim.keymap.set("n", "<D-v>", [["+p]], {desc = "paste from clipboard"})
+  vim.keymap.set("i", "<D-v>", [[<Esc>"+pa]])
+  vim.keymap.set("c", "<D-v>", [[<c-r>+]])
+
+  -- undo
+  vim.keymap.set("n", "<D-z>", "u")
+  vim.keymap.set("i", "<D-z>", "<Esc>ua")
+end
 
 --
 -- My old mappings
@@ -51,7 +68,7 @@ vim.keymap.set("n", ";;", "<cmd>noh<cr>", "Clean search highlights")
 --     noremap = true,
 --     nowait = true,
 -- }
--- 
+--
 -- wk.register({
 --     ["jk"] = { "<Esc>", "Normal mode switch" },
 --     ["JK"] = { "<Esc>", "Normal mode switch" },
@@ -59,7 +76,7 @@ vim.keymap.set("n", ";;", "<cmd>noh<cr>", "Clean search highlights")
 --     ["<a-j>"] = { "<ESC>:m .+1<cr>==gi", "[MOVE] Move block down" },
 --     ["<a-k>"] = { "<ESC>:m .-2<cr>==gi", "[MOVE] Move block up" },
 -- }, i_opts)
--- 
+--
 -- local n_opts = {
 --     mode = "n",
 --     prefix = "",
@@ -67,7 +84,7 @@ vim.keymap.set("n", ";;", "<cmd>noh<cr>", "Clean search highlights")
 --     noremap = true,
 --     nowait = true,
 -- }
--- 
+--
 -- wk.register({
 --     -- [","] = { "@:", "Repeat last command" },
 --     ["<leader>r"] = { "<cmd>reg<cr>", "Show registers" },
@@ -75,45 +92,45 @@ vim.keymap.set("n", ";;", "<cmd>noh<cr>", "Clean search highlights")
 --     ["<leader>O"] = { "O<ESC>", "New line before in normal mode" },
 --     ["<a-j>"] = { ":m .+1<cr>==", "[MOVE] Move line down" },
 --     ["<a-k>"] = { ":m .-2<cr>==", "[MOVE] Move line up" },
--- 
+--
 --     ["t"] = { '"_', "Set black hole registry" },
 --     ["<leader>p"] = { '"_diwP', "Replace word with paste" }, -- "_ is the black hole registry. Deleting in this registry wont overwrite default registry
 --     [";;"] = { "<cmd>noh<cr>", "Clean search highlights" },
--- 
+--
 --     ["<c-Up>"] = { "<cmd>resize +2<cr>", "[WINDOW] Make window taller" },
 --     ["<c-Down>"] = { "<cmd>resize -2<cr>", "[WINDOW] Make window shorter" },
 --     ["<c-Left>"] = { "<cmd>vertical resize -2<cr>", "[WINDOW] Make window narrower" },
 --     ["<c-Right>"] = { "<cmd>vertical resize +2<cr>", "[WINDOW] Make window wider" },
--- 
+--
 --     -- Better window navigation
 --     ["<c-h>"] = { "<c-w>h", "[WINDOW] Focus in left window" },
 --     ["<c-j>"] = { "<c-w>j", "[WINDOW] Focus in bottom window" },
 --     ["<c-k>"] = { "<c-w>k", "[WINDOW] Focus in top window" },
 --     ["<c-l>"] = { "<c-w>l", "[WINDOW] Focus in right window" },
--- 
+--
 --     ["<a-l>"] = { "<cmd>bn<cr>", "[BUFFER] Go previous buffer" },
 --     ["<a-h>"] = { "<cmd>bp<cr>", "[BUFFER] Go next buffer" },
 --     ["<a-w>"] = { "<cmd>bd<cr>", "[BUFFER] Close current buffer" },
 --     ["<a-q>"] = { "<cmd>%bd|e#|bd#<cr>", "[BUFFER] Close other buffers" },
--- 
+--
 --     ["--"] = { "zR", "[FOLDS] Expand all folds" },
 --     ["_"] = { "zM", "[FOLDS] Close all folds" },
--- 
--- 
+--
+--
 --     ["K"] = { "<cmd>lua vim.lsp.buf.hover()<CR>", "[LSP] Hover"},
 --     -- ["K"] = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
--- 
+--
 --     ["gd"] = { "<cmd>lua vim.lsp.buf.definition()<cr>", "[LSP] Go to definition" },
 --     ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<cr>", "[LSP] Go to declaration" },
 --     ["gi"] = { "<cmd>lua vim.lsp.buf.implementation()<cr>", "[LSP] Go to implementation" },
 --     ["gl"] = { "<cmd>Lspsaga codelens<cr>", "[LSP] Code Lens" },
 --     ["go"] = { "<cmd>lua vim.lsp.buf.type_definition()<cr>", "[LSP] Def of type symbol" },
 --     ["gr"] = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
--- 
+--
 --     ["gk"] = { "<cmd>Lspsaga hover_doc<cr>", "[LSP] Hover" },
 --     ["gf"] = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "[LSP] Format code" },
--- 
--- 
+--
+--
 --     ["<leader>t"] = {
 --         name = "[TELESCOPE]",
 --         f = { "<cmd>Telescope find_files hidden=false no_ignore=true<cr>", "[TELESCOPE] Find File" },
@@ -135,11 +152,11 @@ vim.keymap.set("n", ";;", "<cmd>noh<cr>", "Clean search highlights")
 --     },
 --     -- VScode similar
 --     ["<c-p>"] = { "<cmd>Telescope find_files hidden=true no_ignore=true<cr>", "[TELESCOPE] Find File" },
--- 
+--
 --     ["<c-1>"] = { "<cmd>NeoTreeShowToggle<cr>", "[NEOTREE] Toggle" },
 --     ["<c-2>"] = { "<cmd>TroubleToggle<cr>", "[TROUBLE] Toggle" },
 --     ["<c-3>"] = { "<cmd>AerialToggle<cr>", "[AERIAL] Toggle" },
--- 
+--
 --     ["<leader>d"] = {
 --         name = "[DAP debug]",
 --         d = { "<cmd>DapContinue<cr>", "[DAP] Start/continue debug" },
@@ -159,7 +176,7 @@ vim.keymap.set("n", ";;", "<cmd>noh<cr>", "Clean search highlights")
 --     ["<F10>"] = { "<cmd>lua require'dap'.step_over()<cr>", "[DAP] Step over" },
 --     ["<F11>"] = { "<cmd>lua require'dap'.step_into()<cr>", "[DAP] Step into" },
 --     ["<F12>"] = { "<cmd>lua require'dap'.step_out()<cr>", "[DAP] Step out" },
--- 
+--
 --     ["<leader>l"] = {
 --         name = "[LSP]",
 --         gr = { "<cmd>lua vim.lsp.buf.references()<cr>", "[LSP] Go to references" },
@@ -175,20 +192,20 @@ vim.keymap.set("n", ";;", "<cmd>noh<cr>", "Clean search highlights")
 --         f = { "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", "[LSP] Format code" },
 --         rn = { "<cmd>Lspsaga rename<cr>", "[LSP] Rename" },
 --         -- rn = { "<cmd>lua vim.lsp.buf.rename()<CR>", "[LSP] Rename"},
--- 
+--
 --         ca = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code actions" },
 --         -- ca = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "[LSP] Code actions" },
 --         cl = { "<cmd>lua vim.lsp.codelens.run()<CR>", "[LSP] Code lens" },
 --         -- FIXME: reconcile example metals mappings
--- 
+--
 --         -- map("n", "<leader>aa", "<cmd>lua vim.diagnostic.setqflist()<CR>") -- all workspace diagnostics
 --         -- map("n", "<leader>ae", '<cmd>lua vim.diagnostic.setqflist({severity = "E"})<CR>') -- all workspace errors
 --         -- map("n", "<leader>aw", '<cmd>lua vim.diagnostic.setqflist({severity = "W"})<CR>') -- all workspace warnings
 --         -- map("n", "<leader>d", "<cmd>lua vim.diagnostic.setloclist()<CR>") -- buffer diagnostics only
--- 
+--
 --         -- map("n", "[c", "<cmd>lua vim.diagnostic.goto_prev { wrap = false }<CR>")
 --         -- map("n", "]c", "<cmd>lua vim.diagnostic.goto_next { wrap = false }<CR>")
--- 
+--
 --         -- -- Example mappings for usage with nvim-dap. If you don't use that, you can
 --         -- -- skip these
 --         -- map("n", "<leader>dc", [[<cmd>lua require"dap".continue()<CR>]])
@@ -203,9 +220,9 @@ vim.keymap.set("n", ";;", "<cmd>noh<cr>", "Clean search highlights")
 --         name = "[JDTLS]",
 --         o = { "<cmd>lua require'jdtls'.organize_imports()<cr>", "[JDLTS] Organize imports" },
 --     },
--- 
+--
 --     ["<C-\\>"] = { "<cmd>ToggleTerm<cr>", "[TOGGLETERM] Open new terminal" },
--- 
+--
 --     ["<leader>g"] = {
 --         name = "[GIT]",
 --         s = { "<cmd>Gitsigns toggle_signs<cr>", "[GIT] Toggle signs" },
@@ -215,7 +232,7 @@ vim.keymap.set("n", ";;", "<cmd>noh<cr>", "Clean search highlights")
 --         p = { "<cmd>Gitsigns prev_hunk<cr>", "[GIT] Prev hunk" },
 --     },
 -- }, n_opts)
--- 
+--
 -- local v_opts = {
 --     mode = "v",
 --     nowait = true,
@@ -231,7 +248,7 @@ vim.keymap.set("n", ";;", "<cmd>noh<cr>", "Clean search highlights")
 --     ["<a-j>"] = { ":m '>+1<cr>gv=gv", "[MOVE] Move block down" },
 --     ["<a-k>"] = { ":m '<-2<cr>gv=gv", "[MOVE] Move block up" },
 -- }, v_opts)
--- 
+--
 -- local x_opts = {
 --     mode = "x",
 --     nowait = true,
@@ -242,9 +259,9 @@ vim.keymap.set("n", ";;", "<cmd>noh<cr>", "Clean search highlights")
 -- wk.register({
 --     ["<F4>"]  = { "<cmd>Lspsaga code_action<cr>", "[LSP] Code Action" },
 -- }, x_opts)
--- 
+--
 -- wk.setup {}
--- 
+--
 
 -- Special mapping to allow dynamically changing gui font size for a zooming effect
 

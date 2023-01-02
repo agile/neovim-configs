@@ -51,7 +51,7 @@ local options = {
         "linematch:60",         -- perform secondary diff on hunks under 60 lines
     },
 
-    clipboard = "unnamed,unnamedplus", --allows neovim access to the system clipboard
+    -- clipboard = "unnamedplus", --allows neovim access to the system clipboard
     cursorline = true,          -- should the current line be highlighted
     mouse = "a",                -- allow mouse to be used in neovim in all modes
     cmdheight = 2,              -- number of screen lines to use for the command-line.
@@ -81,6 +81,7 @@ if vim.g.neovide then
   vim.g.neovide_cursor_trail_length = 0         -- disable ghosting effect on cursor
   vim.g.neovide_cursor_animation_length = 0     -- disable cursor animations
   vim.g.neovide_input_use_logo = true           -- mess with the super/cmd key?
+  -- vim.g.neovide_transparency = 0.95          -- slightly transparent..
 end
 vim.g.python3_host_prog = "~/.pyenv/versions/neovim_3.8.13/bin/python"
 vim.g.ruby_host_prog = "~/.rbenv/versions/3.1.2/bin/neovim-ruby-host"
@@ -90,11 +91,11 @@ vim.opt.shortmess:remove "F"    -- allow file info to be shown when editing a fi
 
 vim.opt.isfname:append("@-@")   -- allow filenames to also include the @ char
 
-vim.cmd [[set fcs=eob:\ ]]                      -- attempt to disable ~ displayed for empty lines at end of buffer?
-vim.cmd [[filetype plugin indent on]]           -- turn on filetype, plugin, and indent
-vim.cmd "set whichwrap+=<,>,[,],h,l"            -- which keys can move cursor to next/prev line when wrapping (default b, s)
-vim.cmd [[set iskeyword+=-]]                    -- treat hyphenated words as a complete word vs individual words between hyphens
-vim.cmd [[set formatoptions-=cro]]              -- (remove c (auto-wrap), r (auto insert comment leader after hittin return, o (auto insert comment leader after hitting 'o')
+vim.cmd [[set fcs=eob:\ ]]             -- attempt to disable ~ displayed for empty lines at end of buffer?
+vim.cmd [[filetype plugin indent on]]  -- turn on filetype, plugin, and indent
+vim.cmd "set whichwrap+=<,>,[,],h,l"   -- which keys can move cursor to next/prev line when wrapping (default b, s)
+vim.cmd [[set iskeyword+=-]]           -- treat hyphenated words as a complete word vs individual words between hyphens
+vim.cmd [[set formatoptions-=cro]]     -- (remove c (auto-wrap), r (auto insert comment leader after hittin return, o (auto insert comment leader after hitting 'o')
 
 -- local utils = require "utils"
 -- utils.set_indent_sizes { go = 4, python = 4, rust = 4, cpp = 4, c = 4, make = 4, lua = 4, java = 4, json = 4 }
@@ -105,22 +106,3 @@ if _notify then
     vim.notify = notify
 end
 
--- UI theme
--- local default_theme = "lushy-blues"
-local default_theme = "default"
-local themename = "rose-pine"
--- local themename = "draculanight"
--- local themename = "vscode"
--- local themename = "tokyonight"
-local _theme, _ = pcall(require, themename)
-if _theme then
-    local _thememod, thememod = pcall(require, "theme")
-    if _thememod then
-      thememod.init(themename)
-    else
-      vim.cmd.colorscheme(themename)
-    end
-else
-    print("Failed to load theme: " .. themename .. ", using default colorscheme: " .. default_theme)
-    vim.cmd.colorscheme(default_theme)
-end
