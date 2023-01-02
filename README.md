@@ -59,6 +59,13 @@ returns (; what the heck?)
   - https://github.com/neovide/neovide/discussions/1220
     this definitely helps, there's still some weirdness
 
+-- heh, neovide does this odd thing when I copy/paste through https://github.com/debauchee/barrier from a linux machine
+-- where it seems to add dos-style carriage returns, NOT SURE WHY..
+-- fileformat is always unix.. https://github.com/neovide/neovide/blob/a28d72a284882d713fbc291ce9fe164e608e5b0f/src/bridge/handler.rs#L39-L57
+-- so I'm not sure how this is happening https://github.com/neovide/neovide/blob/a28d72a284882d713fbc291ce9fe164e608e5b0f/src/bridge/clipboard.rs#L11-L16
+-- this was my attempt to hack a work-around :P it's pretty gross and dysfunctional
+-- vim.keymap.set("n", "<D-v>", [[:let @*="<c-r><c-r>*"<c-f><s-V>:s//\r/g<cr><cr>"*p]])
+
 ## TODO
 
   In no particular order, maybe, these are some of the next things I intend to do..
