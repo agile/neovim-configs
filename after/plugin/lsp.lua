@@ -61,14 +61,14 @@ lsp.on_attach(function(client, bufnr)
     if client.name ~= "null-ls" then
       print("LSP client " .. client.name .. " supports formatting")
     end
-      vim.api.nvim_clear_autocmds({ group = fmt_group, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
-          group = fmt_group,
-          buffer = bufnr,
-          callback = function()
-              lsp_formatting(bufnr)
-          end,
-      })
+    vim.api.nvim_clear_autocmds({ group = fmt_group, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+        group = fmt_group,
+        buffer = bufnr,
+        callback = function()
+            lsp_formatting(bufnr)
+        end,
+    })
   end
 
   if client.name == "eslint" then
@@ -103,11 +103,12 @@ table.insert(cmp_sources, {name = "nvim_lsp_signature_help"}) -- display functio
 
 local _lspkind, lspkind = pcall(require, "lspkind")
 local _devicons, devicons = pcall(require, "nvim-web-devicons")
+
 local cmp_formatting = {}
 if _lspkind and _devicons then
-  -- TODO: https://github.com/onsails/lspkind.nvim/pull/30
+  -- TODO, maybe: https://github.com/onsails/lspkind.nvim/pull/30
   cmp_formatting = {
-    -- fields = {"menu", "abbr", "kind"},
+    fields = {"kind", "abbr", "menu"},
     format = function(entry, item)
       if vim.tbl_contains({"path"}, entry.source.name) then
         local icon, hl_group = devicons.get_icon(entry:get_completion_item().label)
@@ -117,21 +118,35 @@ if _lspkind and _devicons then
           return item
         end
       end
-      return lspkind.cmp_format({
+
+      local menu = {
+          buffer   = "[BUF]",
+          cmp_jira = "[JIRA]",
+          luasnip  = "[SNIPPET]",
+          nvim_lsp = "[LSP]",
+          nvim_lua = "[NVIM]",
+          path     = "[PATH]",
+          plugins  = "[PLUGIN]",
+      }
+      local kind_name = item.kind
+
+      item = lspkind.cmp_format({
+        -- use vscode icons
         -- preset = "codicons",
         preset = "default",
-        mode = "text_symbol",   -- symbol, symbol_text, text, text_symbol
+        mode = "symbol_text",   -- symbol, symbol_text, text, text_symbol
         maxwidth = 100,         -- truncate long entries
         ellipsis_char = "...",  -- inidcator to append to truncated entries
-        menu = ({
-          buffer = "[BUF]",
-          nvim_lsp = "[LSP]",
-          luasnip = "[SNIPPET]",
-          nvim_lua = "[NVIM]",
-          cmp_jira = "[JIRA]",
-          plugins = "[PLUGIN]",
-        }),
+        menu = (menu),
       })(entry, item)
+
+      -- could just yield item as lspkind formatted it but reformatting a little more to place the
+      -- icon on the left of the suggestion..
+      local strings = vim.split(item.kind, "%s", { trimempty = true })
+      item.kind = " " .. strings[1] .. " "
+      item.menu = " " .. (menu[entry.source.name] or "[???]") .." (" .. kind_name .. ") "
+
+      return item
     end,
   }
 end
@@ -145,6 +160,14 @@ lsp.setup_nvim_cmp({
   select_behavior = "select", -- insert: implicitly insert selection, select: NO IMPLICIT INSERTION
 
   sources = cmp_sources,
+  window = {
+    completion = {
+      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+      col_offset = -3,
+      side_padding = 0,
+    },
+
+  },
   formatting = cmp_formatting,
 })
 
@@ -167,12 +190,14 @@ if _mason_nls then
     automatic_installation = true,
     automatic_setup = true,
     ensure_installed = {
-      "stylua",
       "jq",
       "hadolint",
       "black",
+      "isort",
       "pylint",
+      "rubocop",
       "shellcheck",
+      "stylelua",
       --"sql_formatter",
     },
   })
@@ -182,11 +207,40 @@ end
 local _null_ls, null_ls = pcall(require, "null-ls")
 if _null_ls then
   local sources = {
+    -- docker
+    null_ls.builtins.diagnostics.hadolint,
+    -- json
+    null_ls.builtins.formatting.jq,
+    -- lua
+    null_ls.builtins.formatting.stylua,
+    -- packer
+    null_ls.builtins.formatting.packer,
     -- python
     null_ls.builtins.formatting.black.with({
       extra_args = { "--line-length=120" }
     }),
     null_ls.builtins.formatting.isort,
+    null_ls.builtins.diagnostics.pylint,
+    -- R
+    null_ls.builtins.formatting.format_r,
+    -- ruby
+    null_ls.builtins.diagnostics.rubocop,
+    null_ls.builtins.formatting.rubocop,
+    -- rust
+    null_ls.builtins.formatting.rustfmt,
+    -- scala
+    null_ls.builtins.formatting.scalafmt,
+    -- shell
+    null_ls.builtins.code_actions.shellcheck,
+    null_ls.builtins.diagnostics.shellcheck,
+    null_ls.builtins.hover.printenv,
+    -- SQL
+    null_ls.builtins.formatting.pg_format,
+    -- terraform
+    null_ls.builtins.formatting.terraform_fmt,
+
+    -- etc..
+    null_ls.builtins.diagnostics.trail_space,
   }
 
   null_ls.setup({ sources = sources })
