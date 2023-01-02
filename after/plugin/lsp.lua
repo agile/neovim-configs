@@ -118,10 +118,19 @@ if _lspkind and _devicons then
         end
       end
       return lspkind.cmp_format({
-        mode = "symbol_text",       -- symbol, symbol_text, text, text_symbol
-        maxwidth = 50,         -- truncate long entries
-        ellipsis_char = "...", -- inidcator to append to truncated entries
-        -- with_text = true
+        -- preset = "codicons",
+        preset = "default",
+        mode = "text_symbol",   -- symbol, symbol_text, text, text_symbol
+        maxwidth = 100,         -- truncate long entries
+        ellipsis_char = "...",  -- inidcator to append to truncated entries
+        menu = ({
+          buffer = "[BUF]",
+          nvim_lsp = "[LSP]",
+          luasnip = "[SNIPPET]",
+          nvim_lua = "[NVIM]",
+          cmp_jira = "[JIRA]",
+          plugins = "[PLUGIN]",
+        }),
       })(entry, item)
     end,
   }
@@ -181,9 +190,4 @@ if _null_ls then
   }
 
   null_ls.setup({ sources = sources })
-end
-
-
--- add to your shared on_attach callback
-local on_attach = function(client, bufnr)
 end
