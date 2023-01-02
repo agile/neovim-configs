@@ -24,7 +24,7 @@ lsp.ensure_installed({
     "html",
     "jsonls",
     "pyright",
-    "ruby_ls",
+    -- "ruby_ls",
     "rust_analyzer",
     -- "sqlls",
     -- "sqls",
@@ -76,22 +76,36 @@ if _cmp_jira then
 end
 
 -- Additional completion sources
-local cmp_sources = lsp.defaults.cmp_sources()
+local cmp_sources = lsp.defaults.cmp_sources() -- path, nvim_lsp, buffer, luasnip
 table.insert(cmp_sources, { name = "cmp_jira" }) -- complete JIRA references
 table.insert(cmp_sources, { name = "plugins" }) -- complete gitup refs for plugins
 table.insert(cmp_sources, { name = "nvim_lua" }) -- neovim lua api
 table.insert(cmp_sources, { name = "nvim_lsp_signature_help" }) -- display function signatures
 
-local _lspkind, lspkind = pcall(require, "lspkind")
-local _devicons, devicons = pcall(require, "nvim-web-devicons")
+lsp.setup_nvim_cmp({
+    -- configure completetion to not auto-select suggestions
+    preselect = "none", -- do not auto-select first item in list
+    completion = {
+        completeopt = "menu,menuone,noinsert,noselect",
+    },
+    select_behavior = "select", -- insert: implicitly insert selection, select: NO IMPLICIT INSERTION
 
-local cmp_formatting = {}
-if _lspkind and _devicons then
-    -- TODO, maybe: https://github.com/onsails/lspkind.nvim/pull/30
-    cmp_formatting = {
+    sources = cmp_sources,
+    window = {
+        completion = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            col_offset = -3,
+            side_padding = 0,
+        },
+    },
+    formatting = {
+        -- TODO, maybe.. Better formatting of snippet suggestions
+        -- https://github.com/onsails/lspkind.nvim/pull/30
+        -- https://github.com/danymat/dotfiles/blob/d91534d08e5a3f6085f8348ec3c41982e9b74941/nvim/.config/nvim/lua/configs/cmp.lua#L35-L59
         fields = { "kind", "abbr", "menu" },
         format = function(entry, item)
             if vim.tbl_contains({ "path" }, entry.source.name) then
+                local devicons = require("nvim-web-devicons")
                 local icon, hl_group = devicons.get_icon(entry:get_completion_item().label)
                 if icon then
                     item.kind = icon
@@ -111,7 +125,7 @@ if _lspkind and _devicons then
             }
             local kind_name = item.kind
 
-            item = lspkind.cmp_format({
+            item = require("lspkind").cmp_format({
                 -- use vscode icons
                 -- preset = "codicons",
                 preset = "default",
@@ -130,25 +144,6 @@ if _lspkind and _devicons then
             return item
         end,
     }
-end
-
-lsp.setup_nvim_cmp({
-    -- configure completetion to not auto-select suggestions
-    preselect = "none", -- do not auto-select first item in list
-    completion = {
-        completeopt = "menu,menuone,noinsert,noselect",
-    },
-    select_behavior = "select", -- insert: implicitly insert selection, select: NO IMPLICIT INSERTION
-
-    sources = cmp_sources,
-    window = {
-        completion = {
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-            col_offset = -3,
-            side_padding = 0,
-        },
-    },
-    formatting = cmp_formatting,
 })
 
 lsp.setup()
@@ -198,10 +193,20 @@ if _null_ls then
     local sources = {
         -- docker
         null_ls.builtins.diagnostics.hadolint,
-        -- json
-        null_ls.builtins.formatting.jq,
+        -- go
+        null_ls.builtins.code_actions.gomodifytags,
+        null_ls.builtins.diagnostics.golangci_lint,
+        null_ls.builtins.formatting.gofmt,
+        null_ls.builtins.formatting.goimports,
+        null_ls.builtins.formatting.goimports_reviser,
+        null_ls.builtins.formatting.golines,
+        -- json (prettier handles json too)
+        -- null_ls.builtins.formatting.jq,
         -- lua
+        null_ls.builtins.diagnostics.selene,
         null_ls.builtins.formatting.stylua,
+        -- markdown
+        null_ls.builtins.formatting.markdown_toc,
         -- packer
         null_ls.builtins.formatting.packer,
         -- python
@@ -210,6 +215,7 @@ if _null_ls then
         }),
         null_ls.builtins.formatting.isort,
         null_ls.builtins.diagnostics.pylint,
+        -- null_ls.builtins.diagnostics.mypy,
         -- R
         null_ls.builtins.formatting.format_r,
         -- ruby
@@ -225,11 +231,23 @@ if _null_ls then
         null_ls.builtins.hover.printenv,
         -- SQL
         null_ls.builtins.formatting.pg_format,
+        -- null_ls.builtins.formatting.sql_formatter,
+        -- null_ls.builtins.formatting.sqlfluff,
+        -- null_ls.builtins.formatting.sqlformat,
         -- terraform
         null_ls.builtins.formatting.terraform_fmt,
+        -- yaml
+        null_ls.builtins.diagnostics.yamllint,
+        -- null_ls.builtins.diagnostics.yamlfmt, (prettier formats yaml too)
 
         -- etc..
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.code_actions.refactoring,
+        null_ls.builtins.completion.luasnip,
         null_ls.builtins.diagnostics.trail_space,
+        null_ls.builtins.completion.spell.with({
+            -- filetypes = {"markdown", "html", "text"},
+        }),
     }
 
     null_ls.setup({ sources = sources })
