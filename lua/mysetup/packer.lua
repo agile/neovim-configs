@@ -63,18 +63,21 @@ packer.startup(function(use)
 
   -- LSP
   use {
-    'VonHeikemen/lsp-zero.nvim',
+    "VonHeikemen/lsp-zero.nvim",
     requires = {
       -- LSP Support
-      {'neovim/nvim-lspconfig'},
-      {'williamboman/mason.nvim'},
-      {'williamboman/mason-lspconfig.nvim'},
+      {"neovim/nvim-lspconfig"},
+      {"jose-elias-alvarez/null-ls.nvim"},
+      {"williamboman/mason.nvim"},
+      {"williamboman/mason-lspconfig.nvim"},
+      {"jay-babu/mason-null-ls.nvim"},
 
       -- Autocompletion
       {'hrsh7th/nvim-cmp'},
 
       { -- nvim-cmp extensions
         "onsails/lspkind.nvim",                 -- VSCode like item type icons
+        "kyazdani42/nvim-web-devicons",         -- MOAR ICONS
         "hrsh7th/cmp-buffer",                   -- Buffer completions
         "hrsh7th/cmp-calc",                     -- Math completions
         "hrsh7th/cmp-cmdline",                  -- Command line completions
