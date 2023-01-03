@@ -170,26 +170,30 @@ if _mason_nls then
 
         -- if null-ls is the source of truth
         automatic_setup = false,
-        ensure_installed = nil,
+        ensure_installed = {
+            "hadolint",
+            "goimports",
+            "goimports_reviser",
+            "golangci_lint",
+            "golines",
+            "prettier",
+            "jq",
+            "stylua",
+            "black",
+            "isort",
+            "pylint",
+            "rubocop",
+            "shellcheck",
+        },
 
         -- if mason-null-ls is the source of truth
         -- automatic_setup = true,
-        -- ensure_installed = {
-        --     "jq",
-        --     "hadolint",
-        --     "black",
-        --     "isort",
-        --     "pylint",
-        --     "rubocop",
-        --     "shellcheck",
-        --     "stylelua",
-        --     --"sql_formatter",
-        -- },
     })
 end
 
 local _null_ls, null_ls = pcall(require, "null-ls")
 if _null_ls then
+
     local sources = {
         -- docker
         null_ls.builtins.diagnostics.hadolint,
@@ -203,7 +207,6 @@ if _null_ls then
         -- json (prettier handles json too)
         -- null_ls.builtins.formatting.jq,
         -- lua
-        null_ls.builtins.diagnostics.selene,
         null_ls.builtins.formatting.stylua,
         -- markdown
         null_ls.builtins.formatting.markdown_toc,
@@ -249,6 +252,14 @@ if _null_ls then
             -- filetypes = {"markdown", "html", "text"},
         }),
     }
+
+    -- local function exists(bin)
+    --     return vim.fn.exepath(bin) ~= ""
+    -- end
+    --
+    -- if exists("selene") then
+    --     table.insert(sources, null_ls.builtins.diagnostics.selene)
+    -- end
 
     null_ls.setup({ sources = sources })
 end
