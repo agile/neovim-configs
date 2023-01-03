@@ -1,15 +1,15 @@
 " Various Functions/autocommands
 
-"jump to last cursor position when opening a file
-"dont do it when writing a commit log entry
-function! SetCursorPosition()
-    if &filetype !~ 'commit\c'
-        if line("'\"") > 0 && line("'\"") <= line("$")
-            exe "normal g`\""
-        endif
-    end
-endfunction
-autocmd BufReadPost * call SetCursorPosition()
+" "jump to last cursor position when opening a file
+" "dont do it when writing a commit log entry
+" function! SetCursorPosition()
+"     if &filetype !~ 'commit\c'
+"         if line("'\"") > 0 && line("'\"") <= line("$")
+"             exe "normal g`\""
+"         endif
+"     end
+" endfunction
+" autocmd BufReadPost * call SetCursorPosition()
 
 " http://vimcasts.org/episodes/tidying-whitespace/
 function! <SID>StripTrailingWhitespaces()
