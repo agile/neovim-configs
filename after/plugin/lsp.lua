@@ -53,8 +53,14 @@ lsp.on_attach(function(client, bufnr)
 
     require("lsp-format").on_attach(client)
 
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, opts)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+
     vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
     vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
     vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
@@ -62,6 +68,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
     vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
+
     vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 end)
 
@@ -179,10 +186,11 @@ if _mason_nls then
             "prettier",
             "jq",
             "stylua",
-            "black",
-            "isort",
-            "pylint",
-            "rubocop",
+            -- Found it is actually more ideal to have these managed by venvs
+            --"black",
+            --"isort",
+            --"pylint",
+            -- "rubocop",
             "shellcheck",
         },
 
@@ -193,6 +201,9 @@ end
 
 local _null_ls, null_ls = pcall(require, "null-ls")
 if _null_ls then
+    local function exists(bin)
+        return vim.fn.exepath(bin) ~= ""
+    end
 
     local sources = {
         -- docker
@@ -212,18 +223,8 @@ if _null_ls then
         null_ls.builtins.formatting.markdown_toc,
         -- packer
         null_ls.builtins.formatting.packer,
-        -- python
-        null_ls.builtins.formatting.black.with({
-            extra_args = { "--line-length=120" },
-        }),
-        null_ls.builtins.formatting.isort,
-        null_ls.builtins.diagnostics.pylint,
-        -- null_ls.builtins.diagnostics.mypy,
         -- R
         null_ls.builtins.formatting.format_r,
-        -- ruby
-        null_ls.builtins.diagnostics.rubocop,
-        null_ls.builtins.formatting.rubocop,
         -- rust
         null_ls.builtins.formatting.rustfmt,
         -- scala
@@ -253,13 +254,44 @@ if _null_ls then
         }),
     }
 
-    -- local function exists(bin)
-    --     return vim.fn.exepath(bin) ~= ""
-    -- end
     --
     -- if exists("selene") then
     --     table.insert(sources, null_ls.builtins.diagnostics.selene)
     -- end
+    -- python
+    if exists("black") then
+        table.insert(sources,
+            null_ls.builtins.formatting.black.with({
+                extra_args = { "--line-length=120" },
+                prefer_local = true,
+            }))
+    end
+    if exists("isort") then
+        table.insert(sources,
+            null_ls.builtins.formatting.isort.with({
+                prefer_local = true,
+            }))
+    end
+    if exists("pylint") then
+        table.insert(sources,
+            null_ls.builtins.diagnostics.pylint.with({
+                prefer_local = true,
+            }))
+    end
+    if exists("mypy") then
+        table.insert(sources, null_ls.builtins.diagnostics.mypy)
+    end
+    -- ruby
+    if exists("rubocop") then
+        table.insert(sources,
+            null_ls.builtins.diagnostics.rubocop.with({
+                prefer_local = true,
+            }))
+        table.insert(sources,
+            null_ls.builtins.formatting.rubocop.with({
+                prefer_local = true,
+            }))
+    end
 
     null_ls.setup({ sources = sources })
 end
