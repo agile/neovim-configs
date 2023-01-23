@@ -133,6 +133,10 @@ packer.startup(function(use)
     --   },
     -- }
     use({
+        "tpope/vim-fugitive",
+        "tpope/vim-rhubarb",
+    })
+    use({
         -- Add git related info in the signs columns and popups
         "lewis6991/gitsigns.nvim",
         requires = { "nvim-lua/plenary.nvim" },
@@ -152,6 +156,8 @@ packer.startup(function(use)
     })
     -- Lookml Syntax
     use("thalesmello/lkml.vim")
+    -- R-lang
+    use("jalvesaq/Nvim-R")
 
     -- Utilities
     use("gpanders/editorconfig.nvim") -- support for .editorconfig files https://editorconfig.org/
