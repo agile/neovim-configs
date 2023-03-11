@@ -9,61 +9,70 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 --
 -- Mostly taken from Primeagen's mappings
 --
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, {desc = "Execute a command"})
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Execute a command" })
 
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", {desc = "Move visual selection down"})
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", {desc = "Move visual selection up"})
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move visual selection down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual selection up" })
 
-vim.keymap.set("n", "J", "mzJ`z", {desc = "Join to prev line but keep cursor in same place"})
-vim.keymap.set("n", "<C-d>", "<C-d>zz", {desc = "Half-page down jump but keep cursor in same place"})
-vim.keymap.set("n", "<C-u>", "<C-u>zz", {desc = "Half-page up jump but keep cursor in same place"})
-vim.keymap.set("n", "n", "nzzzv", {desc = "find next search match but keep cursor in same place"})
-vim.keymap.set("n", "N", "Nzzzv", {desc = "find prev search match but keep cursor in same place"})
+vim.keymap.set("n", "J", "mzJ`z", { desc = "Join to prev line but keep cursor in same place" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half-page down jump but keep cursor in same place" })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half-page up jump but keep cursor in same place" })
+vim.keymap.set("n", "n", "nzzzv", { desc = "find next search match but keep cursor in same place" })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "find prev search match but keep cursor in same place" })
 
-vim.keymap.set("x", "<leader>p", [["_dP]], {desc = "paste keeping original copy"})
+vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "paste keeping original copy" })
 
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]], {desc = "yank into system clipboard"})
-vim.keymap.set("n", "<leader>Y", [["+Y]], {desc = "yank line-wise into system clipboard"})
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "yank into system clipboard" })
+vim.keymap.set("n", "<leader>Y", [["+Y]], { desc = "yank line-wise into system clipboard" })
 
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]], {desc = "delete without copying into clipboard"})
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "delete without copying into clipboard" })
 
-vim.keymap.set({"n", "v"}, "Q", "gq", {desc = "format lines"})
+vim.keymap.set({ "n", "v" }, "Q", "gq", { desc = "format lines" })
 
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", {desc = "go to a previous tmux session using sessionizer"})
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, {desc = "format code via lsp"})
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>",
+    { desc = "go to a previous tmux session using sessionizer" })
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "format code via lsp" })
 
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", {desc = "next error in quickfix"})
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", {desc = "prev error in quickfix"})
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "next error in quickfix" })
+vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "prev error in quickfix" })
 vim.keymap.set("n", "<leader>H",
     function()
         local result = vim.treesitter.get_captures_at_cursor(0)
         print(vim.inspect(result))
     end
     -- ":TSHighlightCapturesUnderCursor<CR>"
-, {desc = "Show treesitter capture group for text object under cursor"})
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", {desc = "next error in window"})
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", {desc = "prev error in window"})
+    , { desc = "Show treesitter capture group for text object under cursor" })
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "next error in window" })
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "prev error in window" })
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {desc = "replace word under cursor in whole file"})
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }, {desc = "make current file executable"})
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+    { desc = "replace word under cursor in whole file" })
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true }, { desc = "make current file executable" })
 
 -- vim.keymap.set("n", "<Esc>", "<cmd>noh<cr>", {desc = "Clear search highlights"})
-vim.keymap.set("n", ";;", "<cmd>noh<cr>", {desc = "Clear search highlights"})
+vim.keymap.set("n", ";;", "<cmd>noh<cr>", { desc = "Clear search highlights" })
 
 if vim.g.is_mac then
-  -- copy/paste accommodations for stupid mac..
-  vim.g.neovide_input_use_logo = true
-  --  copy
-  vim.keymap.set("v", "<D-c>", [["+y]], {desc = "copy to clipboard"})
+    -- copy/paste accommodations for stupid mac..
+    vim.g.neovide_input_use_logo = true
+    --  copy
+    -- mac-style cmd-c
+    vim.keymap.set("v", "<D-c>", [["+y]], { desc = "copy to clipboard" })
+    -- shift-ctrl-c
+    vim.keymap.set("v", "<S-C-c>", [["+y]], { desc = "copy to clipboard" })
 
-  --  paste
-  vim.keymap.set("n", "<D-v>", [["+p]], {desc = "paste from clipboard"})
-  vim.keymap.set("i", "<D-v>", [[<Esc>"+pa]])
-  vim.keymap.set("c", "<D-v>", [[<c-r>+]])
+    --  paste
+    vim.keymap.set("n", "<D-v>", [["+p]], { desc = "paste from clipboard" })
+    vim.keymap.set("i", "<D-v>", [[<Esc>"+pa]])
+    vim.keymap.set("c", "<D-v>", [[<c-r>+]])
+    -- shift-ctrl-v
+    vim.keymap.set("n", "<S-C-v>", [["+p]], { desc = "paste from clipboard" })
+    vim.keymap.set("i", "<S-C-v>", [[<Esc>"+pa]])
+    vim.keymap.set("c", "<S-C-v>", [[<c-r>+]])
 
-  -- undo
-  vim.keymap.set("n", "<D-z>", "u")
-  vim.keymap.set("i", "<D-z>", "<Esc>ua")
+    -- undo
+    vim.keymap.set("n", "<D-z>", "u")
+    vim.keymap.set("i", "<D-z>", "<Esc>ua")
 end
 
 --
@@ -300,8 +309,13 @@ end
 -- Call function on startup to set default value
 ResetGuiFont()
 
-vim.keymap.set({ 'n', 'i' }, "<C-+>", function() ResizeGuiFont(1) end, {noremap = true, silent = true, desc = "Increase font size"})
-vim.keymap.set({ 'n', 'i' }, "<C-->", function() ResizeGuiFont(-1) end, {noremap = true, silent = true, desc = "Decrease font size"})
-vim.keymap.set({ 'n', 'i' }, "<C-ScrollWheelUp>", function() ResizeGuiFont(1) end, {noremap = true, silent = true, desc = "Increaser font size"})
-vim.keymap.set({ 'n', 'i' }, "<C-ScrollWheelDown>", function() ResizeGuiFont(-1) end, {noremap = true, silent = true, desc = "Decrease font size"})
-vim.keymap.set({ 'n', 'i' }, "<C-BS>", function() ResetGuiFont() end, {noremap = true, silent = true, desc = "Reset font size"})
+vim.keymap.set({ 'n', 'i' }, "<C-+>", function() ResizeGuiFont(1) end,
+    { noremap = true, silent = true, desc = "Increase font size" })
+vim.keymap.set({ 'n', 'i' }, "<C-->", function() ResizeGuiFont( -1) end,
+    { noremap = true, silent = true, desc = "Decrease font size" })
+vim.keymap.set({ 'n', 'i' }, "<C-ScrollWheelUp>", function() ResizeGuiFont(1) end,
+    { noremap = true, silent = true, desc = "Increaser font size" })
+vim.keymap.set({ 'n', 'i' }, "<C-ScrollWheelDown>", function() ResizeGuiFont( -1) end,
+    { noremap = true, silent = true, desc = "Decrease font size" })
+vim.keymap.set({ 'n', 'i' }, "<C-BS>", function() ResetGuiFont() end,
+    { noremap = true, silent = true, desc = "Reset font size" })
