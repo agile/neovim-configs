@@ -28,7 +28,7 @@ lsp.ensure_installed({
     "rust_analyzer",
     -- "sqlls",
     -- "sqls",
-    "sumneko_lua",
+    "lua_ls",
     "terraformls",
     "tflint",
     "yamlls",
@@ -83,10 +83,10 @@ if _cmp_jira then
 end
 
 -- Additional completion sources
-local cmp_sources = lsp.defaults.cmp_sources() -- path, nvim_lsp, buffer, luasnip
-table.insert(cmp_sources, { name = "cmp_jira" }) -- complete JIRA references
-table.insert(cmp_sources, { name = "plugins" }) -- complete gitup refs for plugins
-table.insert(cmp_sources, { name = "nvim_lua" }) -- neovim lua api
+local cmp_sources = lsp.defaults.cmp_sources()                  -- path, nvim_lsp, buffer, luasnip
+table.insert(cmp_sources, { name = "cmp_jira" })                -- complete JIRA references
+table.insert(cmp_sources, { name = "plugins" })                 -- complete gitup refs for plugins
+table.insert(cmp_sources, { name = "nvim_lua" })                -- neovim lua api
 table.insert(cmp_sources, { name = "nvim_lsp_signature_help" }) -- display function signatures
 
 lsp.setup_nvim_cmp({
@@ -96,7 +96,6 @@ lsp.setup_nvim_cmp({
         completeopt = "menu,menuone,noinsert,noselect",
     },
     select_behavior = "select", -- insert: implicitly insert selection, select: NO IMPLICIT INSERTION
-
     sources = cmp_sources,
     window = {
         completion = {
@@ -136,8 +135,8 @@ lsp.setup_nvim_cmp({
                 -- use vscode icons
                 -- preset = "codicons",
                 preset = "default",
-                mode = "symbol_text", -- symbol, symbol_text, text, text_symbol
-                maxwidth = 100, -- truncate long entries
+                mode = "symbol_text",  -- symbol, symbol_text, text, text_symbol
+                maxwidth = 100,        -- truncate long entries
                 ellipsis_char = "...", -- inidcator to append to truncated entries
                 menu = menu,
             })(entry, item)
@@ -174,7 +173,6 @@ local _mason_nls, mason_nls = pcall(require, "mason-null-ls")
 if _mason_nls then
     mason_nls.setup({
         automatic_installation = true,
-
         -- if null-ls is the source of truth
         automatic_setup = false,
         ensure_installed = {
@@ -193,7 +191,6 @@ if _mason_nls then
             -- "rubocop",
             "shellcheck",
         },
-
         -- if mason-null-ls is the source of truth
         -- automatic_setup = true,
     })
