@@ -51,6 +51,17 @@ lsp.on_attach(function(client, bufnr)
         require("nvim-navic").attach(client, bufnr)
     end
 
+    vim.g.diagnostics_visible = true
+    local function toggle_diagnostics()
+        if vim.g.diagnostics_visible then
+            vim.g.diagnostics_visible = false
+            vim.diagnostic.disable()
+        else
+            vim.g.diagnostics_visible = true
+            vim.diagnostic.enable()
+        end
+    end
+
     require("lsp-format").on_attach(client)
 
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
@@ -61,6 +72,8 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
     vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 
+    vim.keymap.set("n", "<leader>D", toggle_diagnostics,
+        vim.tbl_extend("force", opts, { desc = "lsp toggle diagnostics" }))
     vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
     vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
     vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
@@ -273,6 +286,10 @@ if _null_ls then
         table.insert(sources,
             null_ls.builtins.diagnostics.pylint.with({
                 prefer_local = true,
+                --
+                diagnostics_postprocess = function(diagnostic)
+                    diagnostic.code = diagnostic.message_id
+                end,
             }))
     end
     if exists("mypy") then
