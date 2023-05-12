@@ -288,7 +288,11 @@ vim.g.gui_font_size = vim.g.gui_font_default_size
 -- These 3 are ok, I think..
 -- vim.g.gui_font_face = "Hack Nerd Font"
 -- vim.g.gui_font_face = "UbuntuMono Nerd Font"
-vim.g.gui_font_face = "DejaVuSansMono Nerd Font"
+
+-- gah.. they renamed it
+-- https://github.com/Homebrew/homebrew-cask-fonts/pull/7525/files#diff-a35365bc63e24c154699de2031a74d18df5469eadb02418ff6142f18aadde8da
+-- vim.g.gui_font_face = "DejaVuSansMono Nerd Font"
+vim.g.gui_font_face = "DejaVuSansM Nerd Font Mono"
 
 RefreshGuiFont = function()
     vim.opt.guifont = string.format("%s:h%s", vim.g.gui_font_face, vim.g.gui_font_size)
@@ -311,11 +315,11 @@ ResetGuiFont()
 
 vim.keymap.set({ 'n', 'i' }, "<C-+>", function() ResizeGuiFont(1) end,
     { noremap = true, silent = true, desc = "Increase font size" })
-vim.keymap.set({ 'n', 'i' }, "<C-->", function() ResizeGuiFont( -1) end,
+vim.keymap.set({ 'n', 'i' }, "<C-->", function() ResizeGuiFont(-1) end,
     { noremap = true, silent = true, desc = "Decrease font size" })
 vim.keymap.set({ 'n', 'i' }, "<C-ScrollWheelUp>", function() ResizeGuiFont(1) end,
     { noremap = true, silent = true, desc = "Increaser font size" })
-vim.keymap.set({ 'n', 'i' }, "<C-ScrollWheelDown>", function() ResizeGuiFont( -1) end,
+vim.keymap.set({ 'n', 'i' }, "<C-ScrollWheelDown>", function() ResizeGuiFont(-1) end,
     { noremap = true, silent = true, desc = "Decrease font size" })
 vim.keymap.set({ 'n', 'i' }, "<C-BS>", function() ResetGuiFont() end,
     { noremap = true, silent = true, desc = "Reset font size" })
