@@ -23,7 +23,7 @@ autocmd("BufWinEnter", {
 })
 
 -- Override filetypes
-autocmd("BufRead,BufNewFile", {
+autocmd({"BufRead","BufNewFile"}, {
   group = autogrp,
   pattern = "tsconfig.json",
   callback = function()
