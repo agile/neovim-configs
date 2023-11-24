@@ -251,7 +251,7 @@ if _null_ls then
         -- terraform
         null_ls.builtins.formatting.terraform_fmt,
         -- yaml
-        null_ls.builtins.diagnostics.yamllint,
+        -- null_ls.builtins.diagnostics.yamllint,
         -- null_ls.builtins.diagnostics.yamlfmt, (prettier formats yaml too)
 
         -- etc..
@@ -282,16 +282,16 @@ if _null_ls then
                 prefer_local = true,
             }))
     end
-    if exists("pylint") then
-        table.insert(sources,
-            null_ls.builtins.diagnostics.pylint.with({
-                prefer_local = true,
-                --
-                diagnostics_postprocess = function(diagnostic)
-                    diagnostic.code = diagnostic.message_id
-                end,
-            }))
-    end
+    -- if exists("pylint") then
+    --     table.insert(sources,
+    --         null_ls.builtins.diagnostics.pylint.with({
+    --             prefer_local = true,
+    --             --
+    --             diagnostics_postprocess = function(diagnostic)
+    --                 diagnostic.code = diagnostic.message_id
+    --             end,
+    --         }))
+    -- end
     if exists("mypy") then
         table.insert(sources, null_ls.builtins.diagnostics.mypy)
     end
