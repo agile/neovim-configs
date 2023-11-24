@@ -106,3 +106,6 @@ if _notify then
     vim.notify = notify
 end
 
+-- https://github.com/jalvesaq/Nvim-R/issues/668
+-- let R_assign = 2
+vim.g.R_assign_map = '<M-->'
