@@ -1,7 +1,7 @@
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     PACKER_BOOTSTRAP =
-    vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+        vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
 end
 
 vim.cmd([[packadd packer.nvim]])
@@ -47,11 +47,11 @@ packer.startup(function(use)
     use({
         "nvim-treesitter/nvim-treesitter",
         requires = {
-            "p00f/nvim-ts-rainbow", -- Open/Close node coloring
+            "p00f/nvim-ts-rainbow",                        -- Open/Close node coloring
             "nvim-treesitter/nvim-treesitter-textobjects", -- identify comments
-            "nvim-treesitter/playground", -- View treesitter information directly in Neovim
+            "nvim-treesitter/playground",                  -- View treesitter information directly in Neovim
             "JoosepAlviste/nvim-ts-context-commentstring", -- commentstring
-            "phelipetls/jsonpath.nvim", -- Show jq like path in json under cursor
+            "phelipetls/jsonpath.nvim",                    -- Show jq like path in json under cursor
             -- "the-mikedavis/tree-sitter-diff",            -- grammar for diff output
         },
         run = ":TSUpdate",
@@ -80,21 +80,21 @@ packer.startup(function(use)
             -- Autocompletion
             { "hrsh7th/nvim-cmp" },
 
-            { -- nvim-cmp extensions
-                "onsails/lspkind.nvim", -- VSCode like item type icons
-                "kyazdani42/nvim-web-devicons", -- MOAR ICONS
-                "hrsh7th/cmp-buffer", -- Buffer completions
-                "hrsh7th/cmp-calc", -- Math completions
-                "hrsh7th/cmp-cmdline", -- Command line completions
-                "hrsh7th/cmp-nvim-lsp", -- LSP completions
+            {                                           -- nvim-cmp extensions
+                "onsails/lspkind.nvim",                 -- VSCode like item type icons
+                "kyazdani42/nvim-web-devicons",         -- MOAR ICONS
+                "hrsh7th/cmp-buffer",                   -- Buffer completions
+                "hrsh7th/cmp-calc",                     -- Math completions
+                "hrsh7th/cmp-cmdline",                  -- Command line completions
+                "hrsh7th/cmp-nvim-lsp",                 -- LSP completions
                 "hrsh7th/cmp-nvim-lsp-document-symbol", -- LSP textDocument/documentSymbol completions
-                "hrsh7th/cmp-nvim-lsp-signature-help", -- LSP Signature completions
-                "hrsh7th/cmp-nvim-lua", -- Lua completions
-                "hrsh7th/cmp-path", -- Path completions
-                "lukas-reineke/cmp-under-comparator", -- Better sort completion items starting with underscore (Python)
-                "lttr/cmp-jira", -- JIRA completions
-                "KadoBOT/cmp-plugins", -- Neovim plugin completions
-                "saadparwaiz1/cmp_luasnip", -- Snippet completions
+                "hrsh7th/cmp-nvim-lsp-signature-help",  -- LSP Signature completions
+                "hrsh7th/cmp-nvim-lua",                 -- Lua completions
+                "hrsh7th/cmp-path",                     -- Path completions
+                "lukas-reineke/cmp-under-comparator",   -- Better sort completion items starting with underscore (Python)
+                "lttr/cmp-jira",                        -- JIRA completions
+                "KadoBOT/cmp-plugins",                  -- Neovim plugin completions
+                "saadparwaiz1/cmp_luasnip",             -- Snippet completions
             },
 
             -- Snippets
@@ -156,7 +156,7 @@ packer.startup(function(use)
     use("jalvesaq/Nvim-R")
 
     -- Utilities
-    use("gpanders/editorconfig.nvim") -- support for .editorconfig files https://editorconfig.org/
+    use("gpanders/editorconfig.nvim")                    -- support for .editorconfig files https://editorconfig.org/
     use({ "godlygeek/tabular", cmd = { "Tabularize" } }) -- align the things!
-    use("tpope/vim-sleuth") -- Detect tabstop and shiftwidth automatically
+    use("tpope/vim-sleuth")                              -- Detect tabstop and shiftwidth automatically
 end)
