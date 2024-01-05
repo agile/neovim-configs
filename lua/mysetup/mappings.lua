@@ -292,7 +292,11 @@ vim.g.gui_font_size = vim.g.gui_font_default_size
 -- gah.. they renamed it
 -- https://github.com/Homebrew/homebrew-cask-fonts/pull/7525/files#diff-a35365bc63e24c154699de2031a74d18df5469eadb02418ff6142f18aadde8da
 -- vim.g.gui_font_face = "DejaVuSansMono Nerd Font"
-vim.g.gui_font_face = "DejaVuSansM Nerd Font Mono"
+-- the one I like, seemms to have issues with neovide now :(
+-- vim.g.gui_font_face = "DejaVuSansM Nerd Font Mono"
+-- vim.g.gui_font_face = "FiraCode Nerd Font" -- don't really like the ligatures..
+-- Trying out this monaspace font for a bit..
+vim.g.gui_font_face = "MonaspiceNe Nerd Font Mono"
 
 RefreshGuiFont = function()
     vim.opt.guifont = string.format("%s:h%s", vim.g.gui_font_face, vim.g.gui_font_size)
