@@ -9,7 +9,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 --
 -- Mostly taken from Primeagen's mappings
 --
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Execute a command" })
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open file explorer relative to current file" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move visual selection down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move visual selection up" })
