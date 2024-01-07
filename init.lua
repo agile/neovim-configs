@@ -1,1 +1,1 @@
-require 'mysetup'
+require('myconfig')

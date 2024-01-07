@@ -1,38 +1,22 @@
-# My neovim configs
+My neovim configs
+=================
 
-
-This is basically my ~/.config/nvim directory.
-
-I'm running the nightly build of [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
-([ppa](https://launchpad.net/~neovim-ppa/+archive/ubuntu/unstable)) or `brew install --head neovim`.
-
-I also tend to run nvim from a GUI, currently that tends to be [neovide](https://github.com/neovide/neovide),
-but [there are many different UI's available](https://github.com/neovim/neovim/wiki/Related-projects#gui).
-
-
-Most of this was at least initially done while going through chris@machine's series of videos on:
-[Neovim from Scratch](https://www.youtube.com/playlist?list=PLhoH5vyxr6Qq41NFL4GvhFp-WLd5xzIzZ)
-
+* Currently using Neovim >= 0.9.4 and generally Neovide >= ~0.12.1~ HEAD
 
 ### Notes and Nits I'm still working out
 
-#### Completion
+#### LSP
 
-Sometimes completion is getting triggered in insert mode when I don't really
-want it to and knives come out when I hit enter at the same time the completion
-pops up and get some correction I didn't ask for.
-
-I think it's mostly/always coming from the buffer, so I've added a
-`keyword_length` clause to keep it from being triggered on words fewer than N (5)
-chars to see if that helps, or may just disable buffer suggestions.
+I've left this unconfigured, next session I will decide if I'll update with lsp-zero again
+or go back to home-grown.
 
 #### Colorscheme
 
-I'd been using the [brookstream](https://www.vim.org/scripts/script.php?script_id=619) colorscheme
-for many years, but trying to use something more up to date with all the new
-stuff that's happened in the last 20years.
-
 Currently flipping between:
+* [lushy-blues](https://github.com/agile/lushy-blues) (my attempt to update brookstream)
+  I'd been using the [brookstream](https://www.vim.org/scripts/script.php?script_id=619) colorscheme
+  for many years, but trying to use something more up to date with all the new
+  stuff that's happened in the last 20years.
 * [tokyonight](https://github.com/folke/tokyonight.nvim) with `night` style.
 * [catpuccin](https://github.com/catppuccin/nvim)
 
@@ -83,10 +67,6 @@ returns (; what the heck?)
 * Create a minimal suite of viml configs I can use when/where nvim is not available.
 * Integrations for more languages
 * Host based overrides
-* PIN THE PLUGINS :P, it's like a timebomb right now as every time I touch plugins.lua, packer's going
-  to sync up and apply the latest updates and some of these things are likely to have breaking changes
-  I would much rather handle the upgrades manually or decide which things I'd be fine with riding
-  on the edge.
 * Telescope extensions
   * https://github.com/pwntester/octo.nvim - edit/review GH issues/prs from nvim
   * https://github.com/softinio/scaladex.nvim - import/open packages from scaladex scala package index
@@ -96,8 +76,4 @@ returns (; what the heck?)
   * https://github.com/ANGkeith/telescope-terraform-doc.nvim - Telescope ext to browse terraform docs
 * https://github.com/anuvyklack/windows.nvim - auto-resize windows
 * https://github.com/dccsillag/magma-nvim - jupyter
-* https://github.com/magidc/aerial.nvim - Code outline navigator
-
-
-* https://github.com/magidc/nvim-config - This guy's config looks awesome, lots to draw from here.
-* https://github.com/ThePrimeagen/vim-be-good
+* https://github.com/napisani/nvim-github-codesearch

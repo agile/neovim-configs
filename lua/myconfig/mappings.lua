@@ -4,6 +4,10 @@
 -- ok, giving it another go..
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.g.is_win = (vim.fn.has("win32") or vim.fn.has("win64")) and true or false
+vim.g.is_linux = (vim.fn.has("unix") and (not vim.fn.has("macunix"))) and true or false
+vim.g.is_mac  = vim.fn.has("macunix") and true or false
+
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 --
