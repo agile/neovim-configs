@@ -1,7 +1,7 @@
 require "myconfig.mappings"
 require "myconfig.settings"
 
-require "myconfig.lazy_init"
+require "myconfig.ilazy"
 
 require "myconfig.globals"
 require "myconfig.autocmds"
