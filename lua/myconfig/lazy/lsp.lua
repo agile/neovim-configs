@@ -3,7 +3,7 @@ return {
     {
         "simrat39/rust-tools.nvim",
         dependencies = {
-          "nvim-lua/plenary.nvim",
+            "nvim-lua/plenary.nvim",
         },
     },
     -- Scala LSP extensions
@@ -15,7 +15,231 @@ return {
         },
     },
     -- R-lang
-    "jalvesaq/Nvim-R",
+    {
+        "jalvesaq/Nvim-R",
+    },
+
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
+            "lukas-reineke/lsp-format.nvim",
+            "SmiteshP/nvim-navic",
+            {
+                "hrsh7th/nvim-cmp",
+                event = { "InsertEnter", "CmdlineEnter" },
+            },
+            -- {                                           -- nvim-cmp extensions
+            "onsails/lspkind.nvim",                 -- VSCode like item type icons
+            "kyazdani42/nvim-web-devicons",         -- MOAR ICONS
+            "hrsh7th/cmp-buffer",                   -- Buffer completions
+            "hrsh7th/cmp-calc",                     -- Math completions
+            "hrsh7th/cmp-cmdline",                  -- Command line completions
+            "hrsh7th/cmp-nvim-lsp",                 -- LSP completions
+            "hrsh7th/cmp-nvim-lsp-document-symbol", -- LSP textDocument/documentSymbol completions
+            "hrsh7th/cmp-nvim-lsp-signature-help",  -- LSP Signature completions
+            "hrsh7th/cmp-nvim-lua",                 -- Lua completions
+            "hrsh7th/cmp-path",                     -- Path completions
+            "lukas-reineke/cmp-under-comparator",   -- Better sort completion items starting with underscore (Python)
+            "lttr/cmp-jira",                        -- JIRA completions
+            "KadoBOT/cmp-plugins",                  -- Neovim plugin completions
+            "saadparwaiz1/cmp_luasnip",             -- Snippet completions
+            -- },
+        },
+        config = function()
+            local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
+            local capabilities = require("cmp_nvim_lsp").default_capabilities(lsp_capabilities)
+            require("mason").setup()
+            require("mason-lspconfig").setup({
+                ensure_installed = {
+                    "bashls",        -- bash
+                    "clangd",        -- c/c++
+                    "cmake",         -- cmake language server
+                    "cssls",         -- css language server
+                    "dockerls",      -- dockerfile
+                    "elixirls",      -- elixir
+                    "gopls",         -- go
+                    "html",          -- html language server
+                    "jdtls",         -- java
+                    "jsonnet_ls",    -- jsonnet language server
+                    "lua_ls",        -- lua
+                    "nil_ls",        -- nix language server
+                    "pyright",       -- python
+                    "ruff_lsp",      -- extremely fast Python linter and code transformation
+                    "rust_analyzer", -- rust
+                    "sqls",          -- SQL
+                    "terraformls",   -- terraform hcl
+                    "tflint",        -- terraform lint
+                },
+                handlers = {
+                    -- The first entry (without a key) will be the default handler
+                    -- and will be called for each installed server that doesn't have
+                    -- a dedicated handler.
+                    function(server_name) -- default handler (optional)
+                        require("lspconfig")[server_name].setup({
+                            capabilties = capabilities
+                        })
+                    end,
+                    -- Next, you can provide targeted overrides for specific servers.
+                    ["rust_analyzer"] = function()
+                        require("rust-tools").setup({
+                            capabilties = capabilities
+                        })
+                    end,
+                    ["lua_ls"] = function()
+                        local lspconfig = require("lspconfig")
+                        lspconfig.lua_ls.setup {
+                            capabilties = capabilities,
+                            settings = {
+                                Lua = {
+                                    diagnostics = {
+                                        globals = { "vim" }
+                                    }
+                                }
+                            }
+                        }
+                    end,
+                },
+            })
+
+            local cmp = require("cmp")
+            cmp.setup({
+                -- configure completetion to not auto-select suggestions
+                preselect = "none", -- do not auto-select first item in list
+                completion = {
+                    completeopt = "menu,menuone,noinsert,noselect",
+                },
+                select_behavior = "select",               -- insert: implicitly insert selection, select: NO IMPLICIT INSERTION
+                sources = cmp.config.sources({
+                    { name = "path" },                    -- complete fs paths
+                    { name = "nvim_lsp" },                -- complete JIRA references
+                    { name = "buffer" },                  -- complete JIRA references
+                    { name = "luasnip" },                 -- complete JIRA references
+
+                    { name = "cmp_jira" },                -- complete JIRA references
+                    { name = "plugins" },                 -- complete gitup refs for plugins
+                    { name = "nvim_lua" },                -- neovim lua api
+                    { name = "nvim_lsp_signature_help" }, -- display function signatures
+                }),
+                window = {
+                    completion = {
+                        winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+                        col_offset = -3,
+                        side_padding = 0,
+                    },
+                },
+                formatting = {
+                    -- TODO, maybe.. Better formatting of snippet suggestions
+                    -- https://github.com/onsails/lspkind.nvim/pull/30
+                    -- https://github.com/danymat/dotfiles/blob/d91534d08e5a3f6085f8348ec3c41982e9b74941/nvim/.config/nvim/lua/configs/cmp.lua#L35-L59
+                    fields = { "kind", "abbr", "menu" },
+                    format = function(entry, item)
+                        if vim.tbl_contains({ "path" }, entry.source.name) then
+                            local devicons = require("nvim-web-devicons")
+                            local icon, hl_group = devicons.get_icon(entry:get_completion_item().label)
+                            if icon then
+                                item.kind = icon
+                                item.kind_hl_group = hl_group
+                                return item
+                            end
+                        end
+
+                        local menu = {
+                            buffer = "[BUF]",
+                            cmp_jira = "[JIRA]",
+                            luasnip = "[SNIPPET]",
+                            nvim_lsp = "[LSP]",
+                            nvim_lua = "[NVIM]",
+                            path = "[PATH]",
+                            plugins = "[PLUGIN]",
+                        }
+                        local kind_name = item.kind
+
+                        item = require("lspkind").cmp_format({
+                            -- use vscode icons
+                            -- preset = "codicons",
+                            preset = "default",
+                            mode = "symbol_text",  -- symbol, symbol_text, text, text_symbol
+                            maxwidth = 100,        -- truncate long entries
+                            ellipsis_char = "...", -- inidcator to append to truncated entries
+                            menu = menu,
+                        })(entry, item)
+
+                        -- could just yield item as lspkind formatted it but reformatting a little more to place the
+                        -- icon on the left of the suggestion..
+                        local strings = vim.split(item.kind, "%s", { trimempty = true })
+                        item.kind = " " .. strings[1] .. " "
+                        item.menu = " " .. (menu[entry.source.name] or "[???]") .. " (" .. kind_name .. ") "
+
+                        return item
+                    end,
+                }
+            })
+
+            -- Global mappings.
+            -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+            vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
+            -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+            -- vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+            vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+
+            -- Use LspAttach autocommand to only map the following keys
+            -- after the language server attaches to the current buffer
+            vim.api.nvim_create_autocmd('LspAttach', {
+                group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+                callback = function(args)
+                    local bufnr = args.buf
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+                    if client.server_capabilities.completionProvider then
+                        -- Enable completion triggered by <c-x><c-o>
+                        vim.bo[args.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+                    end
+
+                    if client.server_capabilities.documentSymbolProvider then
+                        require("nvim-navic").attach(client, bufnr)
+                    end
+
+                    vim.g.diagnostics_visible = true
+                    local function toggle_diagnostics()
+                        if vim.g.diagnostics_visible then
+                            vim.g.diagnostics_visible = false
+                            vim.diagnostic.disable()
+                        else
+                            vim.g.diagnostics_visible = true
+                            vim.diagnostic.enable()
+                        end
+                    end
+
+                    require("lsp-format").on_attach(client)
+
+                    -- Buffer local mappings.
+                    -- See `:help vim.lsp.*` for documentation on any of the below functions
+                    local opts = { buffer = args.buf }
+                    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+                    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+                    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+                    vim.keymap.set('n', '<C-h>', vim.lsp.buf.signature_help, opts)
+                    vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
+                    vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+                    vim.keymap.set('n', '<leader>wl', function()
+                        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+                    end, opts)
+                    -- vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+                    vim.keymap.set("n", "<leader>D", toggle_diagnostics,
+                        vim.tbl_extend("force", opts, { desc = "lsp toggle diagnostics" }))
+                    vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+                    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
+                    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+                    vim.keymap.set('n', '<leader>f', function()
+                        vim.lsp.buf.format { async = true }
+                    end, opts)
+                end,
+            })
+        end,
+    },
 
     -- TODO
     -- -- LSP
