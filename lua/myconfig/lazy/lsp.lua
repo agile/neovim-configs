@@ -1,3 +1,27 @@
+local lang_servers = {
+    "bashls",        -- bash
+    "clangd",        -- c/c++
+    "cmake",         -- cmake language server
+    "cssls",         -- css language server
+    "dockerls",      -- dockerfile
+    "elixirls",      -- elixir
+    "gopls",         -- go
+    "html",          -- html language server
+    "jdtls",         -- java
+    "jsonnet_ls",    -- jsonnet language server
+    "lua_ls",        -- lua
+    "pyright",       -- python
+    "ruff_lsp",      -- extremely fast Python linter and code transformation
+    "rust_analyzer", -- rust
+    "sqls",          -- SQL
+    "terraformls",   -- terraform hcl
+    "tflint",        -- terraform lint
+}
+if vim.g.has_nix then
+    -- nix language server
+    vim.tbl_extend("force", lang_servers, { "nil_ls" })
+end
+
 return {
 
     -- Rust LSP extensions
@@ -33,26 +57,7 @@ return {
             local capabilities = require("cmp_nvim_lsp").default_capabilities(lsp_capabilities)
             require("mason").setup()
             require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "bashls",        -- bash
-                    "clangd",        -- c/c++
-                    "cmake",         -- cmake language server
-                    "cssls",         -- css language server
-                    "dockerls",      -- dockerfile
-                    "elixirls",      -- elixir
-                    "gopls",         -- go
-                    "html",          -- html language server
-                    "jdtls",         -- java
-                    "jsonnet_ls",    -- jsonnet language server
-                    "lua_ls",        -- lua
-                    "nil_ls",        -- nix language server
-                    "pyright",       -- python
-                    "ruff_lsp",      -- extremely fast Python linter and code transformation
-                    "rust_analyzer", -- rust
-                    "sqls",          -- SQL
-                    "terraformls",   -- terraform hcl
-                    "tflint",        -- terraform lint
-                },
+                ensure_installed = lang_servers,
                 handlers = {
                     -- The first entry (without a key) will be the default handler
                     -- and will be called for each installed server that doesn't have
