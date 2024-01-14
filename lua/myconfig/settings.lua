@@ -16,32 +16,31 @@ local options = {
     showmode = false,          -- should the current mode be shown in status bar?
     showtabline = 1,           -- should tabline be shown? 0:never, 1:w/1+ tabs, 2: always
 
+    autoindent = true,         -- should lines be automatically indented
+    smartindent = true,        -- does the right thing (mostly) in programs
+    cindent = true,            -- stricter rules for C programs?
+    breakindent = true,        -- maintain indentation when wrapping?
+    expandtab = true,          -- should tabs be expanded to spaces?
+    tabstop = 2,               -- how many characters represent a <Tab>
+    softtabstop = 2,           -- number of space for tabbing while editing
+    shiftwidth = 2,            -- how many characters to indent
+    shiftround = true,         -- should indention be rounded to multiples of shiftwidth?
+    splitbelow = false,        -- should h-splits put new window below current?
+    splitright = false,        -- should v-splits put new window to right of current?
 
-    autoindent = true,     -- should lines be automatically indented
-    smartindent = true,    -- does the right thing (mostly) in programs
-    cindent = true,        -- stricter rules for C programs?
-    breakindent = true,    -- maintain indentation when wrapping?
-    expandtab = true,      -- should tabs be expanded to spaces?
-    tabstop = 2,           -- how many characters represent a <Tab>
-    softtabstop = 2,       -- number of space for tabbing while editing
-    shiftwidth = 2,        -- how many characters to indent
-    shiftround = true,     -- should indention be rounded to multiples of shiftwidth?
-    splitbelow = false,    -- should h-splits put new window below current?
-    splitright = false,    -- should v-splits put new window to right of current?
-
-    scrolloff = 5,         -- minimum lines of context to keep above/below cursor while scrolling
-    sidescrolloff = 5,     -- minimum columns of context to keep before/after cursor while side-scrolling
-    number = true,         -- should the (line) number column be displayed?
-    relativenumber = true, -- should the number column show relative numbered lines?
-    numberwidth = 2,       -- min cols to use for line number. (default 4)
-    signcolumn = "auto",   -- when to show the sign col, yes:always, no:never, auto:when-needed, number:use-number col if present else auto
+    scrolloff = 5,             -- minimum lines of context to keep above/below cursor while scrolling
+    sidescrolloff = 5,         -- minimum columns of context to keep before/after cursor while side-scrolling
+    number = true,             -- should the (line) number column be displayed?
+    relativenumber = true,     -- should the number column show relative numbered lines?
+    numberwidth = 2,           -- min cols to use for line number. (default 4)
+    signcolumn = "auto",       -- when to show the sign col, yes:always, no:never, auto:when-needed, number:use-number col if present else auto
     -- colorcolumn = "80",      -- highlight this column?
-    termguicolors = true,  -- set term gui colors (most terminals support this)
-    background = "dark",   -- adjust default color groups for background type: dark vs light
-    completeopt = {        -- insert-mode completion
-        "menuone",         -- popup menu even w/only 1 option
-        "noselect",        -- don't autoselect options
-        "noinsert",        -- Do not insert any test for a match until a selection is made
+    termguicolors = true,      -- set term gui colors (most terminals support this)
+    background = "dark",       -- adjust default color groups for background type: dark vs light
+    completeopt = {            -- insert-mode completion
+        "menuone",             -- popup menu even w/only 1 option
+        "noselect",            -- don't autoselect options
+        "noinsert",            -- Do not insert any test for a match until a selection is made
     },
     diffopt = {
         "internal",            -- use internal xdiff lib
