@@ -40,11 +40,17 @@ from a linux machine where it seems to add dos-style carriage returns, NOT SURE 
 
 ### FIXMES
 
-* not getting syntax hightlighted diffs when committing
-* nix lsp not installing on mac, need to look into that or  make it conditional?
+* Not getting syntax hightlighted diffs when committing
 * Try and improve the terragrunt experience..
-  https://github.com/hashicorp/vscode-terraform/issues/239#issuecomment-1139572794
-  https://github.com/search?q=repo%3Ahashivim%2Fvim-terraform+terragrunt&type=pullrequests
+  The main issue is it being treated as terraform but it's not really terraform so
+  there's generally a lot of diagnostic about errors that aren't really applicable.
+  Maybe the simple thing to do is detect when we're grunting and disable diagnostics.
+
+  - https://github.com/hashicorp/vscode-terraform/issues/239#issuecomment-1139572794
+  - https://github.com/search?q=repo%3Ahashivim%2Fvim-terraform+terragrunt&type=pullrequests
+  - https://github.com/yorinasub17/vim-terragrunt
+  - https://github.com/rhadley-recurly/vim-terragrunt
+  - https://github.com/hashivim/vim-terraform
 
 ### MAYBES
 
@@ -52,13 +58,10 @@ In no particular order, these are some of the other next things I maybe definite
 
 * Inline test integration: https://www.youtube.com/watch?v=cf72gMBrsI0
 * Telescope-ish Zettlekasten https://github.com/renerocksai/telekasten.nvim
-* Create a minimal suite of viml configs I can use when/where nvim is not available.
 * Telescope extensions
   * https://github.com/pwntester/octo.nvim - edit/review GH issues/prs from nvim
   * https://github.com/softinio/scaladex.nvim - import/open packages from scaladex scala package index
   * https://github.com/nvim-telescope/telescope-github.nvim - GH integration with Telescope
-  * https://github.com/crispgm/telescope-heading.nvim - Jump around headings in docs
-  * https://github.com/LinArcX/telescope-env.nvim - Telescope ext for env vars
   * https://github.com/ANGkeith/telescope-terraform-doc.nvim - Telescope ext to browse terraform docs
 * https://github.com/anuvyklack/windows.nvim - auto-resize windows
 * https://github.com/napisani/nvim-github-codesearch
@@ -69,13 +72,15 @@ In no particular order, these are some of the other next things I maybe definite
   * https://github.com/jorgerojas26/lazysql
   * https://github.com/joe-re/sql-language-server
   * https://github.com/kndndrj/nvim-dbee
-* Some Jupyterness..?
-  * https://github.com/benlubas/molten-nvim
-  * https://github.com/dccsillag/magma-nvim - jupyter
 * Flip-flopper to switch between development/production/etc files in terragrunt repos
   or similar repos that use sensible directory/naming conventionss like test vs code
   being in mirrored paths.. which lends toward being able to predicat the expected relative
   location for related files that can be created/and-or switched between.
   Use to have something like this a long time ago and miss it dearly.
+  - Maybe via https://github.com/tpope/vim-projectionist
+  - Maybe via https://github.com/otavioschwanck/telescope-alternate.nvim
 * Markdown previews, https://github.com/iamcco/markdown-preview.nvim is the one I've used most
-* https://github.com/jbyuki/venn.nvim
+* https://github.com/jbyuki/venn.nvim - helper for drawing ascii diagrams
+* Some Jupyterness..?
+  * https://github.com/benlubas/molten-nvim
+  * https://github.com/dccsillag/magma-nvim - jupyter
