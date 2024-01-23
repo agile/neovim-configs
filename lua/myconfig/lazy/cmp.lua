@@ -3,7 +3,7 @@ return {
   event = { "InsertEnter", "CmdlineEnter" },
   dependencies = {                          -- nvim-cmp extensions
     "onsails/lspkind.nvim",                 -- VSCode like item type icons
-    "kyazdani42/nvim-web-devicons",         -- MOAR ICONS
+    "nvim-tree/nvim-web-devicons",         -- MOAR ICONS
     "hrsh7th/cmp-buffer",                   -- Buffer completions
     "hrsh7th/cmp-calc",                     -- Math completions
     "hrsh7th/cmp-cmdline",                  -- Command line completions
