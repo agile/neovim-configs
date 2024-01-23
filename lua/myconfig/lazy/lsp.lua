@@ -13,7 +13,7 @@ local lang_servers = {
     "pyright",       -- python
     "ruff_lsp",      -- extremely fast Python linter and code transformation
     "rust_analyzer", -- rust
-    "sqls",          -- SQL
+    -- "sqls",          -- SQL
     "terraformls",   -- terraform hcl
     "tflint",        -- terraform lint
 }
