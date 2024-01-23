@@ -34,8 +34,6 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "delete without copy
 
 vim.keymap.set({ "n", "v" }, "Q", "gq", { desc = "format lines" })
 
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>",
-    { desc = "go to a previous tmux session using sessionizer" })
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "format code via lsp" })
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "next error in quickfix" })
