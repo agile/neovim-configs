@@ -3,6 +3,8 @@ return {
     {
       "agile/lushy-blues",
       dir = "~/personal/lushy-blues",
+      lazy = false,
+      priority = 999,
       dependencies = {
         "NvChad/nvim-colorizer.lua",
         "rktjmp/lush.nvim",
