@@ -2,7 +2,7 @@ return {
   {
     {
       "agile/lushy-blues",
-      -- dir = "~/personal/lushy-blues",
+      dir = "~/personal/lushy-blues",
       dependencies = {
         "NvChad/nvim-colorizer.lua",
         "rktjmp/lush.nvim",
