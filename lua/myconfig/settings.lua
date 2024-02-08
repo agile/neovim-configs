@@ -76,10 +76,14 @@ vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
 if vim.g.neovide then
-    vim.g.neovide_cursor_trail_length = 0     -- disable ghosting effect on cursor
-    vim.g.neovide_cursor_animation_length = 0 -- disable cursor animations
-    vim.g.neovide_input_use_logo = true       -- mess with the super/cmd key?
-    -- vim.g.neovide_transparency = 0.95          -- slightly transparent..
+    -- https://neovide.dev/configuration.html#configuration
+    vim.g.neovide_cursor_animation_length = 0      -- disable cursor animations
+    vim.g.neovide_cursor_trail_length = 0          -- disable ghosting effect on cursor
+    vim.g.neovide_input_use_logo = true            -- mess with the super/cmd key?
+    vim.g.neovide_scroll_animation_far_lines = 0   -- number of lines to animate when scrolling more than one screen
+    vim.g.neovide_scroll_animation_length = 0      -- disable scrolling animations
+    vim.g.neovide_unlink_border_highlights = false -- Fix border and winbar scrolling glitches
+
     -- vim.g.neovide_underline_stroke_scale = 100
 end
 vim.g.python3_host_prog = "~/.pyenv/versions/neovim_3.8.13/bin/python"
