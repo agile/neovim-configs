@@ -4,7 +4,7 @@ return {
       "agile/lushy-blues",
       dir = "~/personal/lushy-blues",
       lazy = false,
-      priority = 999,
+      priority = 1000,
       dependencies = {
         "NvChad/nvim-colorizer.lua",
         "rktjmp/lush.nvim",
@@ -19,9 +19,9 @@ return {
 
       config = function()
         -- UI theme
-        -- local default_theme = "lushy-blues"
-        local default_theme = "tokyonight"
-        local themename = os.getenv("THEME") or "lushy-blues"
+        local default_theme = "lushy-blues"
+        -- local default_theme = "tokyonight"
+        local themename = os.getenv("THEME") or default_theme -- "lushy-blues"
         -- local themename = "draculanight"
         -- local themename = "vscode"
         -- local themename = "tokyonight"
