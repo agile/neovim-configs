@@ -1,4 +1,5 @@
 local lang_servers = {
+    "basedpyright", -- python
     "bashls", -- bash
     "clangd", -- c/c++
     "cmake", -- cmake language server
@@ -10,8 +11,7 @@ local lang_servers = {
     "jdtls", -- java
     "jsonnet_ls", -- jsonnet language server
     "lua_ls", -- lua
-    "pyright", -- python
-    "ruff_lsp", -- extremely fast Python linter and code transformation
+    "ruff", -- extremely fast Python linter and code transformation
     "rust_analyzer", -- rust
     -- "sqls",          -- SQL
     "terraformls", -- terraform hcl
@@ -23,9 +23,6 @@ if vim.g.has_nix then
 end
 
 return {
-    -- Neovim dev conveniences
-    { "folke/neodev.nvim" },
-
     -- Rust LSP extensions
     {
         "simrat39/rust-tools.nvim",
@@ -37,9 +34,28 @@ return {
     {
         "scalameta/nvim-metals",
         dependencies = {
-            "nvim-lua/plenary.nvim",
+
             "mfussenegger/nvim-dap",
         },
+        ft = { "scala", "sbt", "java" },
+        -- opts = function()
+        --   local metals_config = require("metals").bare_config()
+        --   metals_config.on_attach = function(client, bufnr)
+        --     -- your on_attach function
+        --   end
+
+        --   return metals_config
+        -- end,
+        config = function(self, metals_config)
+          local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+          vim.api.nvim_create_autocmd("FileType", {
+            pattern = self.ft,
+            callback = function()
+              require("metals").initialize_or_attach(metals_config)
+            end,
+            group = nvim_metals_group,
+          })
+        end
     },
     -- R-lang
     {
@@ -76,7 +92,6 @@ return {
             "nanotee/sqls.nvim", -- bindings/events for SQLs server
         },
         config = function()
-            require("neodev").setup({})
             local lsp_capabilities = vim.lsp.protocol.make_client_capabilities()
             local capabilities = require("cmp_nvim_lsp").default_capabilities(lsp_capabilities)
             require("mason").setup()
@@ -110,6 +125,23 @@ return {
                             },
                         })
                     end,
+                    -- ["terraformls"] = function()
+                    --     lsp_capabilities.terraformls.setup({
+                    --         init_options = {
+                    --             experimentalFeatures = {
+                    --                 prefillRequiredFields = true,
+                    --             },
+                    --         },
+                    --     })
+                    -- end,
+                    -- ["basedpyright"] = function()
+                    --     local lspconfig = require("lspconfig")
+                    --     lspconfig.python.setup({
+                    --         analysis = {
+                    --             -- python.analysis.typeCheckingMode
+                    --         }
+                    --     })
+                    -- end,
                 },
             })
 
@@ -124,6 +156,22 @@ return {
                 severity_sort = false,
                 float = true,
             })
+
+            vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+              vim.lsp.handlers.hover, {
+                -- Use a sharp border with `FloatBorder` highlights
+                border = "single",
+                -- add the title in hover float window
+                -- title = "hover"
+              }
+            )
+
+            vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+              vim.lsp.handlers.signature_help, {
+                -- Use a sharp border with `FloatBorder` highlights
+                border = "single"
+              }
+            )
 
             vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
             -- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
@@ -169,7 +217,7 @@ return {
                     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
                     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
                     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-                    vim.keymap.set("n", "<C-h>", vim.lsp.buf.signature_help, opts)
+                    -- vim.keymap.set("n", "<C-s>", vim.lsp.buf.signature_help, opts)
                     vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
                     vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
                     vim.keymap.set("n", "<leader>wl", function()
