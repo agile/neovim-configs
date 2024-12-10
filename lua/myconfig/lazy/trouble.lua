@@ -1,5 +1,8 @@
 return {
   "folke/trouble.nvim",
+  win = {
+    position = "left",
+  },
   config = function()
     require("trouble").setup()
     vim.keymap.set("n", "<leader>td", function()
