@@ -84,3 +84,12 @@ In no particular order, these are some of the other next things I maybe definite
 * Some Jupyterness..?
   * https://github.com/benlubas/molten-nvim
   * https://github.com/dccsillag/magma-nvim - jupyter
+* Some work conveniences?
+  * Confluence
+    * https://github.com/cpkio/nvim-confluence
+    * https://github.com/mramsden/fluence.nvim
+  * JIRA
+    * https://github.com/vipul-sharma20/nvim-jira (https://vipul.xyz/2020/06/nvim-jira)
+    * https://github.com/kid-icarus/jira.nvim
+    * https://github.com/walialu/jira.nvim
+    * https://github.com/artem-nefedov/cmp-jira-issues.nvim (already using https://github.com/lttr/cmp-jira)
