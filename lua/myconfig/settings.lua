@@ -65,6 +65,8 @@ local options = {
     foldlevel = 99,
 
     conceallevel = 0, -- so that `` is visible in markdown files
+
+    winborder = "rounded", -- put a single line rounded border around popups/hovers
 }
 
 for key, value in pairs(options) do
